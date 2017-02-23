@@ -14,17 +14,9 @@ public class ViewController {
 
 
     @RequestMapping({
-        "/",
-        "/cars",
-        "/gallery",
-        "/tracks",
-        "/tracks/{id:\\w+}",
-        "/location",
-        "/about"
+        "/"
     })
     public String index(Model model){
-        model.addAttribute("username", "Boro Krnjez");
-        model.addAttribute("date", new Date());
         return "index";
     }
 }
