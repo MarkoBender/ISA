@@ -1,0 +1,128 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/restorani">Restorani <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="#/rezervacije">Rezervacije</a></li>
+                    <li><a href="#/pozivnice">Pozivnice</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a href="#/nalog">Moj nalog</a></li>
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="row" >
+
+        <div class="col-md-12" style="border: 1px solid black;">
+            <h1>Moje rezervacije</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Datum</th>
+                    <th>Trajanje</th>
+                    <th>Prijatelji</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--tr>
+                    <td>Moj naziv</td>
+                    <td>12.12.2016</td>
+                    <td>2 sata</td>
+                    <td>
+                        <ul class="list-group">
+                            <li >Petar Petrovic<input type="checkbox"disabled checked></li>
+                            <li >Marko Markovic</li>
+                            <li >Boro Boric</li>
+                            <li >Nikola Nikolic</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-group" style="list-style-type: none;">
+                            <li ><input type="checkbox"disabled checked></li>
+                            <li ><input type="checkbox"disabled ></li>
+                            <li ><input type="checkbox"disabled checked></li>
+                            <li ><input type="checkbox"disabled ></li>
+                        </ul>
+                    </td>
+                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-pozovi" ng-click="getInvitable(nesto)">Pozovi prijatelja</button></td>
+                    <td><button class="btn btn-danger">Naruci</button></td>
+                </tr-->
+                <!--tr ng-repeat="res in reservations">
+                    <td>{{res.restaurant.name}}</td>
+                    <td>{{res.dateTime}}</td>
+                    <td>{{res.duration + " sata"}}</td>
+                    <td>
+                        <ul class="list-group">
+                            <li>Petar Petrovic</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-group" style="list-style-type: none;">
+                            <li ><input type="checkbox"disabled checked></li>
+                            <li ><input type="checkbox"disabled ></li>
+                            <li ><input type="checkbox"disabled checked></li>
+                            <li ><input type="checkbox"disabled ></li>
+                        </ul>
+                    </td>
+                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-pozovi" ng-click="getInvitable(res)">Pozovi prijatelja</button></td>
+                    <td><button class="btn btn-danger">Naruci</button></td>
+                </tr-->
+
+                <tr ng-repeat="res in reservationsWithInvitations">
+                    <td>{{res.reservation.restaurant.name}}</td>
+                    <td>{{res.reservation.dateTime}}</td>
+                    <td>{{res.reservation.duration + " sata"}}</td>
+                    <td>
+                        <ul class="list-group" >
+                            <li ng-repeat="inv in res.invitations"><input type="checkbox"disabled ng-checked="inv.confirmed==true">{{" " + inv.invited.name + " " + inv.invited.surname}}</li>
+                        </ul>
+                    </td>
+                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-pozovi" ng-click="getInvitable(res.reservation)">Pozovi prijatelja</button></td>
+                    <td><button class="btn btn-danger">Naruci</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+    <div class="container">
+        <div class="modal fade" id="modal-pozovi">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Rezervacija - korak 3</h3>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody>
+                            <tr ng-repeat="friend in invitable">
+                                <td>{{friend.name +" "+ friend.surname}}</td>
+                                <td><button class="btn btn-success" ng-click="invite(friend.user_id)">Pozovi</button></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Zavrsi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

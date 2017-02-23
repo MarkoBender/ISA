@@ -1,0 +1,40 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/konkursi">Pregled svih konkursa</a></li>
+                    <li class="active"><a href="#/mojrestoran">Profil restorana</a><span class="sr-only">(current)</span></li>
+                    <li><a href="#/noviponudjac">Novi ponudjac</a></li>
+                    <li><a href="#/noviradnik">Novi radnik</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <br>
+            <h1>Podesavanja restorana:</h1>
+            <label>Naziv restorana : </label><br>
+            <input type="text" ng-model = "restaurant.name" class="form-control">
+            <label>Opis(vrsta) restorana : </label><br>
+            <input type="text" ng-model = "restaurant.description" class="form-control">
+            <br>
+            <button type="button" class="btn btn-success" ng-click="update()">Potvrdi izmene</button>
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1><a href="#/jelovnik" class="btn btn-info">Jelovnik</a>
+            <button type="button" href="#/kartapica" class="btn btn-info">Karta pica</button></h1>
+        </div>
+    </div>
+</div>

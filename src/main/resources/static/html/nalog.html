@@ -1,0 +1,139 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/restorani">Restorani <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/rezervacije">Rezervacije</a></li>
+                    <li><a href="#/pozivnice">Pozivnice</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#/nalog">Moj nalog</a></li>
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="row" >
+        <div class="col-md-3" style="height:250px;">
+        </div>
+        <div class="col-md-9">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Ime:</td>
+                    <td><input type="text" class="form-control" ng-model="user.name"></td>
+                </tr>
+                <tr>
+                    <td>Prezime:</td>
+                    <td><input type="text" class="form-control" ng-model="user.surname"></td>
+                </tr>
+                <tr>
+                    <td>Adresa:</td>
+                    <td><input type="text" class="form-control" ng-model="user.adress"></td>
+                </tr>
+                <tr>
+                    <td>Broj poseta:</td>
+                    <td>{{user.visits}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="btn btn-primary" ng-click="izmeniNalog()">Izmeni</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-md-4">
+            <h1>Zahtevi za prijateljstvo:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ime i prezime:</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="request in requests">
+                    <td>{{request.name + " " + request.surname}}</td>
+                    <td><button class="btn btn-primary" ng-click="prihvati(request.user_id)">Prihvati</button></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-4">
+            <h1>Moji prijatelji:</h1>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Pretrazi">
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ime i prezime:</th>
+                    <th>Broj poseta:</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="friend in friends">
+                    <td>{{friend.name + " " + friend.surname}}</td>
+                    <td>{{friend.visits}}</td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" ng-click="pripremaZaBrisanje(friend)" data-target="#modal-1">Obrisi</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Dodaj prijatelja">
+                <input type="text" class="form-control" placeholder="Dodaj prijatelja">
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ime i prezime:</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="gst in addable">
+                    <td>{{gst.name + " " + gst.surname}}</td>
+                    <td><button class="btn btn-success" ng-click="dodaj(gst.user_id)">Dodaj</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">{{zaBrisanje.name + " " + zaBrisanje.surname}}</h3>
+                    </div>
+                    <div class="modal-body">
+                        Da li ste sigurni da zelite da obrisete prijatelja?
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <a href="" class="btn btn-primary" ng-click="obrisi()" data-dismiss="modal">Obrisi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

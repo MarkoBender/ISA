@@ -1,0 +1,85 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/konkursi">Pregled svih konkursa<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/profilrestorana">Profil restorana</a></li>
+                    <li><a href="#/noviponudjac">Novi ponudjac</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Aktivne ponude za konkurs</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ponudjac</th>
+                    <th>Cena</th>
+                    <th>Garancije</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="offer in offers">
+                    <td>{{offer.salesman.email}}</td>
+                    <td>{{offer.price}}</td>
+                    <td>{{offer.description}}</td>
+                    <th><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1"
+                                ng-click="info(offer)">Informacije o ponudi</button></th>
+                    <th><image ng-show="offer.accepted == 'true' " src="images/trophy.png"></image></th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Informacije o ponudi za konkurs</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Cena:</td>
+                                        <td><input type="text" class="form-control" ng-model="template_offer.price" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Opis:</td>
+                                        <td><textarea class="form-control" rows="5" ng-model="template_offer.description" readonly></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Datum dostavljanja, garancije... :</td>
+                                        <td><input type="text" class="form-control" ng-model="template_offer.delivery_deadline" readonly></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-show="buyingOrder.status == 'Active' " ng-click="accept()">Prihvati ponudu</button>
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

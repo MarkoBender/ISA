@@ -1,0 +1,91 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/konkursi">Pregled svih konkursa<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/profilrestorana">Profil restorana</a></li>
+                    <li><a href="#/noviponudjac">Novi ponudjac</a></li>
+                    <li><a href="#/noviradnik">Novi radnik</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Konkursi:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>OD</th>
+                    <th>DO</th>
+                    <th>Namirnice</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in buyingorders">
+                    <td>{{order.active_from | date:'dd-MM-yyyy' }}</td>
+                    <td>{{order.active_until | date:'dd-MM-yyyy'}}</td>
+                    <td>{{order.order_description}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a class="btn btn-info" href="#/konkursponude/{{order.buying_order_id}}">Pregled svih ponuda</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1" ng-click="resetfields()">Novi konkurs</button></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Novi konkurs</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Aktivan od:</td>
+                                        <td><input type="date" class="form-control" ng-model="neworder.active_from"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aktivan do:</td>
+                                        <td><input type="date" class="form-control" ng-model="neworder.active_until"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Opis namirnica za narucivanje:</td>
+                                        <td><input type="text" class="form-control" ng-model="neworder.order_description"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <button type="button"  data-dismiss="modal" class="btn btn-primary" ng-click="create()">Dodaj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

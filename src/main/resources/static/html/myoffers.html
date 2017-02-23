@@ -1,0 +1,130 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li ><a href="#/salesmanorders">Pregled svih aktivnih konkursa </a></li>
+                    <li class="active"><a href="#/myoffers">Istorija porudzbina<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/salesmanaccount">Moj nalog</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Istorija ponuda:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>OD</th>
+                    <th>DO</th>
+                    <th>Restoran dostave</th>
+                    <th>Cena</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="offer in offers">
+                    <td>{{offer.myorder.active_from | date:'dd-MM-yyyy' }}</td>
+                    <td>{{offer.myorder.active_until | date:'dd-MM-yyyy'}}</td>
+                    <td>{{offer.myorder.restaurant.name}}</td>
+                    <td>{{offer.price}}</td>
+                    <td><button type="button" class="btn btn-success"
+                                data-toggle="modal" data-target="#modal-1" ng-click="clear(offer)">Vise informacija</button></td>
+                    <td ><button ng-if="currentdate < offer.myorder.active_until && offer.myorder.status == 'Active'" type="button" class="btn btn-success"
+                                data-toggle="modal" data-target="#modal-2" ng-click="clear(offer)">Izmena ponude</button></td>
+                    <td><img ng-if="offer.accepted == 'true'"src="images/trophy.png"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Informacije o ponudi za konkurs</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Cena:</td>
+                                        <td><input type="text" class="form-control" ng-model="template_offer.price" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Opis:</td>
+                                        <td><textarea class="form-control" rows="5" ng-model="template_offer.description" readonly></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Datum dostavljanja, garancije... :</td>
+                                        <td><input type="text" class="form-control" ng-model="template_offer.delivery_deadline" readonly></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-2">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Informacije o ponudi za konkurs</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Cena:</td>
+                                        <td><input type="text" class="form-control" ng-model="template_offer.price"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Opis:</td>
+                                        <td><textarea class="form-control" rows="5" ng-model="template_offer.description"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Datum dostavljanja, garancije... :</td>
+                                        <td><input type="text" class="form-control" ng-model="template_offer.delivery_deadline"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <button type="button"  data-dismiss="modal" class="btn btn-primary" ng-click="update()">Izmeni ponudu</button>
+                        <button type="button"  data-dismiss="modal" class="btn btn-primary" ng-click="delete()">Izbrisi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

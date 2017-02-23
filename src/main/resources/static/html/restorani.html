@@ -1,0 +1,305 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/restorani">Restorani <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/rezervacije">Rezervacije</a></li>
+                    <li><a href="#/pozivnice">Pozivnice</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a href="#/nalog">Moj nalog</a></li>
+                    <li><a href="#" ng-click="logout()">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-6" style="border: 1px solid black">
+            <h1>Svi restorani:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Ocena</th>
+                    <th>Ocena prijatelja</th>
+                    <th>Udaljenost</th>
+                    <th>Action</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="res in restaurants">
+                    <td>{{res.name}}</td>
+                    <td>{{res.ocena}}</td>
+                    <td>{{res.ocenaP}}</td>
+                    <td>{{res.description}}</td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" ng-click="zapocniRezervaciju(res)" data-target="#modal-1">Rezervisi</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6" style="border: 1px solid black;">
+            <h1>Poseceni restorani:</h1>
+            <table class="table" >
+                <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Datum</th>
+                    <th>Ocena</th>
+                    <th>Action</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="res in visited">
+                    <td>{{res.restaurant.name}}</td>
+                    <td>{{res.dateTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>4.7</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-4">Oceni</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Rezervacija - korak 1</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Naziv:</td>
+                                        <td>{{restoran.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Datum:</td>
+                                        <td>
+                                            <form>
+                                                <input type="date" name="bday" ng-model="datum">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trajanje:</td>
+                                        <td>
+                                            <select ng-model="trajanje">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <button type="button"  ng-disabled="trajanje==null && datum==null" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" data-target="#modal-2" >Dalje</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="modal fade" id="modal-2">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Rezervacija - korak 2</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Naziv:</td>
+                                        <td>{{restoran.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Datum:</td>
+                                        <td>{{datum}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trajanje:</td>
+                                        <td>{{trajanje + " sata"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Broj stola:</td>
+                                        <td>
+                                            <select ng-model="broj_stola">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <button type="button" ng-disabled="broj_stola==null" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" data-target="#modal-3" >Dalje</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-3">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Rezervacija - korak 3</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Naziv:</td>
+                                        <td>{{restoran.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Datum:</td>
+                                        <td>{{datum}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trajanje:</td>
+                                        <td>{{trajanje + " sata"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Broj stola:</td>
+                                        <td>{{broj_stola}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Dodaj prijatelja:
+                                        </td>
+                                        <td>
+                                            <div class="form-group" style="width:250px;">
+                                                <input type="text" class="form-control" placeholder="Search">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <table class="table">
+                                                <tbody>
+                                                <tr ng-repeat="friend in friends">
+                                                    <td>{{friend.name +" "+ friend.surname}}</td>
+                                                    <td><button class="btn btn-success" ng-click="pozoviPrijatelja(friend.user_id)">Pozovi</button></td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="rezervisi()" data-toggle="modal">Dalje</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="modal fade" id="modal-4">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Rezervacija - korak 3</h3>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Naziv:</td>
+                                <td>Moj Naziv</td>
+                            </tr>
+                            <tr>
+                                <td>Datum:</td>
+                                <td>12.12.2016.</td>
+                            </tr>
+                            <tr>
+                                <td>Trajanje:</td>
+                                <td>2 sata</td>
+                            </tr>
+                            <tr>
+                                <td>Ocena restorana:</td>
+                                <td>
+                                    <div class="rating">
+                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ocena konobara:</td>
+                                <td>
+                                    <div class="rating">
+                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ocena jela:</td>
+                                <td>
+                                    <div class="rating">
+                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <button type="button" data-dismiss="modal" class="btn btn-primary" data-toggle="modal">Oceni</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

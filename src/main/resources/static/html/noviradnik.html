@@ -1,0 +1,110 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/konkursi">Pregled svih konkursa</a></li>
+                    <li><a href="#/profilrestorana">Profil restorana</a></li>
+                    <li><a href="#/noviponudjac">Novi ponudjac</a></li>
+                    <li class="active"><a href="#/noviradnik">Novi radnik<span class="sr-only">(current)</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h2>{{error}}</h2>
+            <h3>Izaberite tip radnika</h3>
+            <br>
+            <select ng-model="usertype">
+                <option value=""></option>
+                <option value="kuvar">Kuvar</option>
+                <option value="sanker">Sanker</option>
+                <option value="konobar">Konobar</option>
+            </select>
+            <br>
+            <div ng-show="usertype == 'kuvar'">
+                <br>
+                <label>Email: </label><br>
+                <input type="text" ng-model = "newCook.email" class="form-control">
+                <label>Password : </label><br>
+                <input type="text" ng-model = "newCook.password" class="form-control">
+                <label>Ime : </label><br>
+                <input type="text" ng-model = "newCook.name" class="form-control">
+                <label>Prezime : </label><br>
+                <input type="text" ng-model = "newCook.surname" class="form-control">
+                <br>
+                <label>Datum rodjenja : </label><br>
+                <input type="date" ng-model = "newCook.birthDate" class="form-control">
+                <br>
+                <label>Velicina pantalona : </label><br>
+                <input type="text" ng-model = "newCook.pantsSize" class="form-control">
+                <br>
+                <label>Broj cipela : </label><br>
+                <input type="text" ng-model = "newCook.shoeSize" class="form-control">
+                <br>
+                <label>Tip jela : </label><br>
+                <select ng-model="newCook.dishType" ng-options="res.name for res in dishtypes">
+                </select>
+                <br>
+                <br>
+                <button type="button" class="btn btn-success" ng-click="registerCook()">Dodaj kuvara</button>
+            <br>
+            </div>
+            <div ng-show="usertype == 'sanker'">
+                <br>
+                <label>Email: </label><br>
+                <input type="text" ng-model = "newBarman.email" class="form-control">
+                <label>Password : </label><br>
+                <input type="text" ng-model = "newBarman.password" class="form-control">
+                <label>Ime : </label><br>
+                <input type="text" ng-model = "newBarman.name" class="form-control">
+                <label>Prezime : </label><br>
+                <input type="text" ng-model = "newBarman.surname" class="form-control">
+                <br>
+                <label>Datum rodjenja : </label><br>
+                <input type="date" ng-model = "newBarman.birthDate" class="form-control">
+                <br>
+                <label>Velicina pantalona : </label><br>
+                <input type="text" ng-model = "newBarman.pantsSize" class="form-control">
+                <br>
+                <label>Broj cipela : </label><br>
+                <input type="text" ng-model = "newBarman.shoeSize" class="form-control">
+                <br>
+                <br>
+                <button type="button" class="btn btn-success" ng-click="registerBarman()">Dodaj sankera</button>
+                <br>
+            </div>
+            <div ng-show="usertype == 'konobar'">
+                <br>
+                <label>Email: </label><br>
+                <input type="text" ng-model = "newSteward.email" class="form-control">
+                <label>Password : </label><br>
+                <input type="text" ng-model = "newSteward.password" class="form-control">
+                <label>Ime : </label><br>
+                <input type="text" ng-model = "newSteward.name" class="form-control">
+                <label>Prezime : </label><br>
+                <input type="text" ng-model = "newSteward.surname" class="form-control">
+                <br>
+                <label>Datum rodjenja : </label><br>
+                <input type="date" ng-model = "newSteward.birthDate" class="form-control">
+                <br>
+                <label>Velicina pantalona : </label><br>
+                <input type="text" ng-model = "newSteward.pantsSize" class="form-control">
+                <br>
+                <label>Broj cipela : </label><br>
+                <input type="text" ng-model = "newSteward.shoeSize" class="form-control">
+                <br>
+                <br>
+                <button type="button" class="btn btn-success" ng-click="registerSteward()">Dodaj konobara</button>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
