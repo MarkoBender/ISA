@@ -7,6 +7,7 @@
     var App = angular.module('app', ['ngRoute','ngCookies']);
 
     App.config(['$routeProvider', function ($routeProvider) {
+
         $routeProvider.when('/cars', {
             templateUrl: 'brt.html'
 

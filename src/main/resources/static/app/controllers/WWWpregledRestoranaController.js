@@ -8,6 +8,12 @@
     WWWpregledRestoranaController.$inject = ['$cookies','$http','$scope'];
     function WWWpregledRestoranaController($cookies,$http,$scope) {
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                }
+
 
         $http.get('/restaurants/all').success(function(response){
                     console.log("I got the data I requested!");
