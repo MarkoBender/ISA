@@ -70,6 +70,11 @@
                                     controller: 'WWWpregledMenadzeraRestoranaController'
                                 });
 
+        $routeProvider.when('/WWWpregledMenadzeraSistema', {
+                                            templateUrl: 'html/WWWpregledMenadzeraSistema.html',
+                                            controller: 'WWWpregledMenadzeraSistemaController'
+                                        });
+
 
 
         $routeProvider.when('/noviponudjac', {

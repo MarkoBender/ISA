@@ -4,9 +4,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/WWWpregledRestorana">Pregled restorana <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#/WWWpregledMenadzeraRestorana">Pregled menadzera</a></li>
-                    <li><a href="#/WWWpregledMenadzeraSistema">Pregled menadzera sistema <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/WWWpregledRestorana">Pregled restorana <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/WWWpregledMenadzeraRestorana">Pregled menadzera <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="#/WWWpregledMenadzeraSistema">Pregled menadzera sistema <span class="sr-only">(current)</span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
@@ -18,22 +18,25 @@
 
     <div class="row">
         <div class="col-md-12" style="border: 1px solid black">
-            <h1>Svi restorani:</h1>
+            <h1>Svi menadzeri:</h1>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Naziv</th>
-                    <th>Opis</th>
-                    <th>Zaduzeni menadzer</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
                     <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="res in restaurants">
-                    <td>{{res.name}}</td>
-                    <td>{{res.description}}</td>
+                <tr ng-repeat="sm in systemManagers">
+                    <td>{{sm.email}}</td>
+                    <td>{{sm.password}}</td>
+                    <td>{{sm.name}}</td>
+                    <td>{{sm.surname}}</td>
                     <td>&nbsp;</td>
-                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-2" ng-click="zapocniIzmenuRestorana(res.restaurant_id)">Izmeni</button></td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-2" ng-click="zapocniIzmenuMenadzeraSistema(sm.user_id)">Izmeni</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -42,7 +45,7 @@
 
     <div class="row">
         <div class="col-md-12" style="border: 1px solid black">
-            <h1><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1" ng-click="zapocniKreiranjeRestorana()">Dodaj nov restoran</button></h1>
+            <h1><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1" ng-click="zapocniKreiranjeMenadzeraSistema()">Dodaj novog menadzera sistema</button></h1>
         </div>
     </div>
 
@@ -52,7 +55,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Dodavanje novog resotrana</h3>
+                        <h3 class="modal-title">Dodavanje novog menadzera sistema</h3>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -60,16 +63,20 @@
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <td>Naziv:</td>
-                                        <td><input type="text" name="name" class="form-control" ng-model="restoran.name"></td>
+                                        <td>Email:</td>
+                                        <td><input type="text" name="email" class="form-control" ng-model="systemManager.email"></td>
                                     </tr>
                                     <tr>
-                                        <td>Opis:</td>
-                                        <td><input type="text" name="description" class="form-control" ng-model="restoran.description"></td>
+                                        <td>Password:</td>
+                                        <td><input type="text" name="password" class="form-control" ng-model="systemManager.password"></td>
                                     </tr>
                                     <tr>
-                                        <td>Lokacija:</td>
-                                        <td><div class="container" id="map_container1" style="height:500px; width:500px"></div></td>
+                                        <td>Ime:</td>
+                                        <td><input type="text" name="name" class="form-control" ng-model="systemManager.name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prezime:</td>
+                                        <td><input type="text" name="surname" class="form-control" ng-model="systemManager.surname"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -79,7 +86,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
-                        <button type="button"  ng-disabled="restoran.name==null" data-dismiss="modal" class="btn btn-primary" ng-click="zavrsiKreiranjeRestorana()">Dodaj</button>
+                        <button type="button"  ng-disabled="systemManager.password==null" data-dismiss="modal" class="btn btn-primary" ng-click="zavrsiKreiranjeMenadzeraSistema()">Dodaj</button>
                     </div>
                 </div>
             </div>
@@ -92,7 +99,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Izmena postojeceg resotrana</h3>
+                        <h3 class="modal-title">Izmena postojeceg menadzera sistema</h3>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -100,16 +107,20 @@
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <td>Naziv:</td>
-                                        <td><input type="text" name="name" class="form-control" ng-model="restoran.name"></td>
+                                        <td>Email:</td>
+                                        <td><input type="text" name="email" class="form-control" ng-model="systemManager.email"></td>
                                     </tr>
                                     <tr>
-                                        <td>Opis:</td>
-                                        <td><input type="text" name="description" class="form-control" ng-model="restoran.description"></td>
+                                        <td>Password:</td>
+                                        <td><input type="text" name="password" class="form-control" ng-model="systemManager.password"></td>
                                     </tr>
                                     <tr>
-                                        <td>Lokacija:</td>
-                                        <td><div class="container" id="map_container2" style="height:500px; width:500px"></div></td>
+                                        <td>Ime:</td>
+                                        <td><input type="text" name="name" class="form-control" ng-model="systemManager.name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prezime:</td>
+                                        <td><input type="text" name="surname" class="form-control" ng-model="systemManager.surname"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -119,13 +130,10 @@
                     </div>
                     <div class="modal-footer">
                         <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
-                        <button type="button"  ng-disabled="restoran.name==null" data-dismiss="modal" class="btn btn-primary" ng-click="zavrsiIzmenuRestorana()">Izmeni</button>
+                        <button type="button"  ng-disabled="systemManager.password==null" data-dismiss="modal" class="btn btn-primary" ng-click="zavrsiIzmenuMenadzeraSistema()">Izmeni</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 </div>
