@@ -3,10 +3,7 @@ package com.bender.Controllers;
 import com.bender.Beans.Barman;
 import com.bender.Repositories.BarmanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +30,25 @@ public class BarmanController {
         newUser.setUloga("Barman");
         newUser.setFirstLog(true);
         repository.save(newUser);
+    }
+
+    @RequestMapping(value = "/findOne/{id}")
+    public Barman getById(@PathVariable long id){
+        return repository.findOne(id);
+    }
+
+    @RequestMapping(value = "/changepassword/{id}", method = RequestMethod.PUT)
+    public void changepassword(@PathVariable long id, @RequestBody String newPassword) {
+        Barman steward = repository.findOne(id);
+        steward.setPassword(newPassword);
+        steward.setFirstLog(false);
+        repository.save(steward);
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public void update(@PathVariable long id, @RequestBody Barman updatedSteward) {
+        Barman steward = updatedSteward;
+        steward.setUser_id(id);
+        repository.save(steward);
     }
 }
