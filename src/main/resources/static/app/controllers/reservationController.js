@@ -29,6 +29,18 @@
 console.log($scope.reservationsWithInvitations);
         }
 
+
+        $scope.naruci = function(jelo){
+            console.log(jelo);
+        }
+
+        $scope.zapocni_narucivanje = function(restoran){
+            $http.get('/dishes/menu/' + restoran.restaurant_id).success(function(response){
+                $scope.jelovnik = response;
+            });
+        }
+
+
         var currentReservation;
         $scope.getInvitable = function(res){
             currentReservation = res;
