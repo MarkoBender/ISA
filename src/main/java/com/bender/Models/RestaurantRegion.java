@@ -29,19 +29,23 @@ public class RestaurantRegion {
     @Column
     private double height;
 
+    @Column
+    private String color;
+
     //lazy, all
     @ManyToOne
     private Restaurant restaurant;
 
     public RestaurantRegion(){}
 
-    public RestaurantRegion(long restaurantRegion_id, String name, double xvalue, double yvalue, double width, double height, Restaurant restaurant) {
+    public RestaurantRegion(long restaurantRegion_id, String name, double xvalue, double yvalue, double width, double height, String color, Restaurant restaurant) {
         this.restaurantRegion_id = restaurantRegion_id;
         this.name = name;
         this.xvalue = xvalue;
         this.yvalue = yvalue;
         this.width = width;
         this.height = height;
+        this.color = color;
         this.restaurant = restaurant;
     }
 
@@ -91,6 +95,14 @@ public class RestaurantRegion {
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public Restaurant getRestaurant() {
