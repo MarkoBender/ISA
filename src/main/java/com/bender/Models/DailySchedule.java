@@ -19,10 +19,19 @@ public class DailySchedule {
     private Employee employee;
 
     @Column
-    private Date startDate;
+    private Date day;
 
     @Column
-    private Date endDate;
+    private int startHours;
+
+    @Column
+    private int startMinutes;
+
+    @Column
+    private int endHours;
+
+    @Column
+    private int endMinutes;
 
     @ManyToOne
     private RestaurantRegion restaurantRegion;
@@ -32,11 +41,14 @@ public class DailySchedule {
 
     public DailySchedule(){}
 
-    public DailySchedule(long dailySchedule_id, Employee employee, Date startDate, Date endDate, RestaurantRegion restaurantRegion, Restaurant restaurant) {
+    public DailySchedule(long dailySchedule_id, Employee employee, Date day, int startHours, int startMinutes, int endHours, int endMinutes, RestaurantRegion restaurantRegion, Restaurant restaurant) {
         this.dailySchedule_id = dailySchedule_id;
         this.employee = employee;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.day = day;
+        this.startHours = startHours;
+        this.startMinutes = startMinutes;
+        this.endHours = endHours;
+        this.endMinutes = endMinutes;
         this.restaurantRegion = restaurantRegion;
         this.restaurant = restaurant;
     }
@@ -57,20 +69,44 @@ public class DailySchedule {
         this.employee = employee;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getDay() {
+        return day;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setDay(Date day) {
+        this.day = day;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public int getStartHours() {
+        return startHours;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setStartHours(int startHours) {
+        this.startHours = startHours;
+    }
+
+    public int getStartMinutes() {
+        return startMinutes;
+    }
+
+    public void setStartMinutes(int startMinutes) {
+        this.startMinutes = startMinutes;
+    }
+
+    public int getEndHours() {
+        return endHours;
+    }
+
+    public void setEndHours(int endHours) {
+        this.endHours = endHours;
+    }
+
+    public int getEndMinutes() {
+        return endMinutes;
+    }
+
+    public void setEndMinutes(int endMinutes) {
+        this.endMinutes = endMinutes;
     }
 
     public RestaurantRegion getRestaurantRegion() {

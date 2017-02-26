@@ -1,5 +1,6 @@
 package com.bender.Models;
 
+import com.bender.Beans.Restaurant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -29,15 +30,19 @@ public class RestaurantTable {
     @ManyToOne
     private RestaurantRegion restaurantRegion;
 
+    @ManyToOne
+    private Restaurant restaurant;
+
     public RestaurantTable(){}
 
-    public RestaurantTable(long restaurantTable_id, double xvalue, double yvalue, double width, double height, RestaurantRegion restaurantRegion) {
+    public RestaurantTable(long restaurantTable_id, double xvalue, double yvalue, double width, double height, RestaurantRegion restaurantRegion, Restaurant restaurant) {
         this.restaurantTable_id = restaurantTable_id;
         this.xvalue = xvalue;
         this.yvalue = yvalue;
         this.width = width;
         this.height = height;
         this.restaurantRegion = restaurantRegion;
+        this.restaurant = restaurant;
     }
 
     public long getRestaurantTable_id() {
@@ -86,5 +91,13 @@ public class RestaurantTable {
 
     public void setRestaurantRegion(RestaurantRegion restaurantRegion) {
         this.restaurantRegion = restaurantRegion;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

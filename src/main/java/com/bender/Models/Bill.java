@@ -3,7 +3,6 @@ package com.bender.Models;
 import com.bender.Beans.Steward;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

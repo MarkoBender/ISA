@@ -21,17 +21,13 @@ public class OrderItem {
     @Column
     private String status;
 
-    @ManyToOne
-    private GuestOrder guestOrder;
-
     public OrderItem(){}
 
-    public OrderItem(long orderItem_id, FoodDrinkItem foodDrinkItem, int amount, String status, GuestOrder guestOrder) {
+    public OrderItem(long orderItem_id, FoodDrinkItem foodDrinkItem, int amount, String status) {
         this.orderItem_id = orderItem_id;
         this.foodDrinkItem = foodDrinkItem;
         this.amount = amount;
         this.status = status;
-        this.guestOrder = guestOrder;
     }
 
     public long getOrderItem_id() {
@@ -64,13 +60,5 @@ public class OrderItem {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public GuestOrder getGuestOrder() {
-        return guestOrder;
-    }
-
-    public void setGuestOrder(GuestOrder guestOrder) {
-        this.guestOrder = guestOrder;
     }
 }
