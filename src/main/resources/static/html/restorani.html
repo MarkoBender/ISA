@@ -132,7 +132,7 @@
 
                     <div class="modal-footer">
                         <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
-                        <button type="button"  ng-disabled="trajanje==null && datum==null" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" data-target="#modal-2" >Dalje</button>
+                        <button type="button"  ng-disabled="trajanje==null || datum==null" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" data-target="#modal-2" >Dalje</button>
                     </div>
                 </div>
             </div>
@@ -254,7 +254,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                        <a href="" class="btn btn-default" data-dismiss="modal" ng-click="getFriends();">Odustani</a>
                         <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="rezervisi()" data-toggle="modal">Dalje</button>
                     </div>
                 </div>

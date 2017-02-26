@@ -69,12 +69,17 @@
           return deg * (Math.PI/180)
         }
 
-        console.log('/guests/friends/' + $cookies.get('id'));
-        $http.get('/guests/friends/' + $cookies.get('id')).success(function(response){
-            console.log("I got the data I requested!");
-            $scope.friends = response;
-        });
 
+
+        $scope.getFriends = function(){
+            console.log('/guests/friends/' + $cookies.get('id'));
+            $http.get('/guests/friends/' + $cookies.get('id')).success(function(response){
+                console.log("I got the data I requested!");
+                $scope.friends = response;
+            });
+        }
+
+        $scope.getFriends();
 
         $scope.logout = function (){
              $cookies.put('name', null);
@@ -125,6 +130,7 @@
                             console.log("POSTOVO SAM!");
                         });
                     }
+                    $scope.getFriends();
                 });
             });
 

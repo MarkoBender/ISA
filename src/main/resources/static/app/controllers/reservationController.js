@@ -56,6 +56,7 @@ console.log($scope.reservationsWithInvitations);
             $http.put('/invitations/add/'+ invited_id,currentReservation).success(function(response){
                 console.log("I got the data I requested!");
                 $scope.getInvitable(currentReservation);
+                refresh();
             });
         }
 
