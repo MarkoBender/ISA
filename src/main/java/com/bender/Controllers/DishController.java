@@ -34,7 +34,6 @@ public class DishController {
 
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
     public void create(@RequestBody Dish newdish) {
-        System.out.println(newdish.getCena());
         repository.save(newdish);
     }
 
@@ -46,7 +45,7 @@ public class DishController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable long id, @RequestBody Dish updatedDish) {
         Dish dish = updatedDish;
-        dish.setDish_id(id);
+        //dish.setDish_id(id);
         repository.save(dish);
     }
 }

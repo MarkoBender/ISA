@@ -75,7 +75,20 @@
                                             controller: 'WWWpregledMenadzeraSistemaController'
                                         });
 
+        $routeProvider.when('/WWWkuvar', {
+                            templateUrl: 'html/WWWkuvar.html',
+                            controller: 'WWWkuvarController'
+                        });
 
+        $routeProvider.when('/WWWkonobar', {
+                                    templateUrl: 'html/WWWkonobar.html',
+                                    controller: 'WWWkonobarController'
+                                });
+
+        $routeProvider.when('/WWWsanker', {
+                                            templateUrl: 'html/WWWsanker.html',
+                                            controller: 'WWWsankerController'
+                                        });
 
         $routeProvider.when('/noviponudjac', {
             templateUrl: 'html/vuksa.html',

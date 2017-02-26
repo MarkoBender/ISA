@@ -2,6 +2,7 @@ package com.bender.Beans;
 
 import com.bender.Models.OrderItem;
 import com.bender.Models.RestaurantTable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,22 +29,14 @@ public class Reservation {
 
     private int duration;
 
-    @OneToMany
-    private List<RestaurantTable> reservationTables;
-
-    @OneToMany
-    private List<OrderItem> orderItems;
-
     public Reservation(){}
 
-    public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration, List<RestaurantTable> reservationTables, List<OrderItem> orderItems) {
+    public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration) {
         this.reservation_id = reservation_id;
         this.restaurant = restaurant;
         this.host = host;
         this.dateTime = dateTime;
         this.duration = duration;
-        this.reservationTables = reservationTables;
-        this.orderItems = orderItems;
     }
 
     public long getReservation_id() {
@@ -85,14 +78,4 @@ public class Reservation {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-
-    public List<RestaurantTable> getReservationTables() {
-        return reservationTables;
-    }
-
-    public void setReservationTables(List<RestaurantTable> reservationTables) {
-        this.reservationTables = reservationTables;
-    }
-
-
 }

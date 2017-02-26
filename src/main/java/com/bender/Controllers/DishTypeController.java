@@ -21,6 +21,18 @@ public class DishTypeController {
     public DishTypeController(DishTypeRepository repository){
 
         this.repository = repository;
+        /*DishType dt1=new DishType();
+        dt1.setName("meso");
+
+        DishType dt2=new DishType();
+        dt2.setName("salata");
+
+        DishType dt3=new DishType();
+        dt3.setName("supa");
+
+        this.repository.save(dt1);
+        this.repository.save(dt2);
+        this.repository.save(dt3);*/
     }
 
     @RequestMapping(value = "/all")

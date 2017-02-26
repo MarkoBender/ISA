@@ -1,18 +1,13 @@
-package com.bender.Models;
+package com.bender.Beans;
 
-import com.bender.Beans.Restaurant;
-import com.bender.Beans.User;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by User on 2/26/2017.
  */
-//@Entity
-//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class Employee extends User {
 
     @Column

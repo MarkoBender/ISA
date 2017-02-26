@@ -1,5 +1,7 @@
 package com.bender.Models;
 
+import com.bender.Beans.FoodDrinkItem;
+
 import javax.persistence.*;
 
 /**

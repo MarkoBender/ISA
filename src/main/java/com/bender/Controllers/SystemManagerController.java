@@ -21,6 +21,13 @@ public class SystemManagerController {
     @Autowired
     public SystemManagerController(SystemManagerRepository repository){
         this.repository=repository;
+        /*SystemManager sysm=new SystemManager();
+        sysm.setEmail("admin@live.com");
+        sysm.setPassword("123");
+        sysm.setName("Admin");
+        sysm.setSurname("Adminic");
+        sysm.setUloga("SystemManager");
+        this.repository.save(sysm);*/
     }
 
     @RequestMapping(value = "/all")

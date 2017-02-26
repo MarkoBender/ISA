@@ -5,8 +5,11 @@
         .module('app')
         .controller('WWWpregledMenadzeraRestoranaController', WWWpregledMenadzeraRestoranaController);
 
-    WWWpregledMenadzeraRestoranaController.$inject = ['$cookies','$http','$scope'];
-    function WWWpregledMenadzeraRestoranaController($cookies,$http,$scope) {
+    WWWpregledMenadzeraRestoranaController.$inject = ['$cookies','$http','$scope','$location'];
+    function WWWpregledMenadzeraRestoranaController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'SystemManager')
+                    $location.url('/#');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

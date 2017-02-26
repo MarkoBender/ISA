@@ -19,6 +19,7 @@
             });
 
         $scope.registerCook = function (){
+            $scope.newCook.restaurant = $scope.loggedUser.restaurant;
             $http.post('/users/existsEmail',$scope.newCook.email)
                 .success(function(response){
                     if(response == false){

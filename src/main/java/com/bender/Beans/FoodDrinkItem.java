@@ -1,4 +1,4 @@
-package com.bender.Models;
+package com.bender.Beans;
 
 import com.bender.Beans.Restaurant;
 
@@ -8,8 +8,8 @@ import javax.persistence.*;
  * Created by User on 2/25/2017.
  */
 //treba biti isahijerarhija sa hranom i picem, zbog stavki za meni
-//@Entity
-//@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class FoodDrinkItem {
 
     @Id

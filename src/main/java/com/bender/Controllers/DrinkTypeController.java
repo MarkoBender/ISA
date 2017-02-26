@@ -21,6 +21,15 @@ public class DrinkTypeController {
     @Autowired
     public DrinkTypeController (DrinkTypeRepository repository) {
         this.repository = repository;
+        /*
+        DrinkType dt1=new DrinkType();
+        dt1.setName("bezalkoholni");
+
+        DrinkType dt2=new DrinkType();
+        dt2.setName("alkohol");
+
+        this.repository.save(dt1);
+        this.repository.save(dt2);*/
 }
 
     @RequestMapping(value = "/all")

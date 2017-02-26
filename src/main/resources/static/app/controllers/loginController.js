@@ -18,6 +18,12 @@
             $location.url('/konkursi');
         else if($cookies.get('uloga') == 'Salesman')
             $location.url('/salesmanorders');
+        else if($cookies.get('uloga') == 'Steward')
+            $location.url('/WWWkonobar');
+        else if($cookies.get('uloga') == 'Cook')
+            $location.url('/WWWkuvar');
+        else if($cookies.get('uloga') == 'Barman')
+            $location.url('/WWWsanker');
 
 
         $scope.register = function(){
@@ -50,6 +56,12 @@
                         $location.url('/konkursi');
                      else if(response.uloga == 'Salesman')
                         $location.url('/salesmanorders');
+                     else if($cookies.get('uloga') == 'Steward')
+                         $location.url('/WWWkonobar');
+                     else if($cookies.get('uloga') == 'Cook')
+                         $location.url('/WWWkuvar');
+                     else if($cookies.get('uloga') == 'Barman')
+                         $location.url('/WWWsanker');
                 }
                 else{
                     alert('Neuspesno logovanje');

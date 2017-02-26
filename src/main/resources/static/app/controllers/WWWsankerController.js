@@ -3,13 +3,13 @@
 
          angular
              .module('app')
-             .controller('KukaController', KukaController);
+             .controller('WWWsankerController', WWWsankerController);
 
-         KukaController.$inject = ['$cookies','$http','$scope','$location'];
-         function KukaController($cookies,$http,$scope,$location) {
+         WWWsankerController.$inject = ['$cookies','$http','$scope','$location'];
+         function WWWsankerController($cookies,$http,$scope,$location) {
 
-            if($cookies.get('uloga') != 'SystemManager')
-                        $location.url('/#');
+            /*if($cookies.get('uloga') != 'Barman')
+                        $location.url('/#');*/
 
             $scope.logout = function (){
                          $cookies.put('name', null);

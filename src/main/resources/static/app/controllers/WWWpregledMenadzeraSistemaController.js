@@ -5,8 +5,11 @@
         .module('app')
         .controller('WWWpregledMenadzeraSistemaController', WWWpregledMenadzeraSistemaController);
 
-    WWWpregledMenadzeraSistemaController.$inject = ['$cookies','$http','$scope'];
-    function WWWpregledMenadzeraSistemaController($cookies,$http,$scope) {
+    WWWpregledMenadzeraSistemaController.$inject = ['$cookies','$http','$scope','$location'];
+    function WWWpregledMenadzeraSistemaController($cookies,$http,$scope, $location) {
+
+        if($cookies.get('uloga') != 'SystemManager')
+                    $location.url('/#');
 
         $scope.logout = function (){
                      $cookies.put('name', null);
