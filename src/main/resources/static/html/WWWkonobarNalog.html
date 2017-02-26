@@ -1,0 +1,66 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/WWWpregledNarudzbina">Pregled narudzbena</a></li>
+                    <li><a href="#/WWWpregledPrihvacenihNarudzbina">Pregled prihvacenih narudzbina</a></li>
+                    <li><a href="#/WWWpregledGotovihNarudzbina">Pregled gotovih narudzbina</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#/WWWkonobarNalog">Moj nalog</a></li>
+                    <li><a href="#" ng-click="logout()">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Izmena naloga</h1>
+            <label>Email:</label>
+            <input type="text" class="form-control" ng-model="steward.email">
+            <label>Ime:</label>
+            <input type="text" class="form-control" ng-model="steward.name">
+            <label>Prezime:</label>
+            <input type="text" class="form-control" ng-model="steward.surname">
+            <label>Datum rodjenja : </label><br>
+            <input type="date" ng-model = "steward.birthDate" class="form-control">
+            <label>Velicina pantalona:</label>
+            <input type="text" class="form-control" ng-model="steward.pantsSize">
+            <label>Velicina patika:</label>
+            <input type="text" class="form-control" ng-model="steward.shoeSize">
+            <br>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-1">Promena lozinke</button>
+            <button type="button" class="btn btn-success" ng-click="update()">Potvrdi izmene</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Promena lozinke</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <h3><font color="red">{{error}}</font></h3>
+                                <label>Nova sifra:</label>
+                                <input type="password" id="newpassword" class="form-control" ng-model="newpassword">
+                                <br>
+                                <label>Potvrdite novu sifru:</label>
+                                <input type="password" id="confirmpassword" class="form-control" ng-model="confirmpassword">
+                                <br>
+                                <button type="button" class="btn btn-success" ng-click="changepassword()">Potvrdi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

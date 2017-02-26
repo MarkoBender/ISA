@@ -3,16 +3,30 @@
         <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul ng-show="loggedUser.firstLog == false" class="nav navbar-nav">
                     <li><a href="#/WWWpregledNarudzbina">Pregled narudzbena</a></li>
                     <li><a href="#/WWWpregledPrihvacenihNarudzbina">Pregled prihvacenih narudzbina</a></li>
                     <li><a href="#/WWWpregledGotovihNarudzbina">Pregled gotovih narudzbina</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li ><a href="#/WWWkonobarNalog">Moj nalog</a></li>
                     <li><a href="#" ng-click="logout()">Izloguj se</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <div class="row" ng-show="loggedUser.firstLog == true">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Promenite sifru da bi nastavili dalje</h1>
+            <h3><font color="red">{{error}}</font></h3>
+            <label>Nova sifra:</label>
+            <input type="password" id="newpassword" class="form-control" ng-model="newpassword">
+            <br>
+            <label>Potvrdite novu sifru:</label>
+            <input type="password" id="confirmpassword" class="form-control" ng-model="confirmpassword">
+            <br>
+            <button type="button" class="btn btn-success" ng-click="changepassword()">Potvrdi</button>
+        </div>
+    </div>
 </div>

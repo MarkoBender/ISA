@@ -80,15 +80,30 @@
                             controller: 'WWWkuvarController'
                         });
 
+        $routeProvider.when('/WWWkuvarNalog', {
+                                                    templateUrl: 'html/WWWkuvarNalog.html',
+                                                    controller: 'WWWkuvarNalogController'
+                                                });
+
         $routeProvider.when('/WWWkonobar', {
                                     templateUrl: 'html/WWWkonobar.html',
                                     controller: 'WWWkonobarController'
                                 });
 
+        $routeProvider.when('/WWWkonobarNalog', {
+                                            templateUrl: 'html/WWWkonobarNalog.html',
+                                            controller: 'WWWkonobarNalogController'
+                                        });
+
         $routeProvider.when('/WWWsanker', {
                                             templateUrl: 'html/WWWsanker.html',
                                             controller: 'WWWsankerController'
                                         });
+
+        $routeProvider.when('/WWWsankerNalog', {
+                    templateUrl: 'html/WWWsankerNalog.html',
+                    controller: 'WWWsankerNalogController'
+                });
 
         $routeProvider.when('/noviponudjac', {
             templateUrl: 'html/vuksa.html',
