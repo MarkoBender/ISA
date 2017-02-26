@@ -79,7 +79,7 @@
 
                 <tr ng-repeat="res in reservationsWithInvitations">
                     <td>{{res.reservation.restaurant.name}}</td>
-                    <td>{{res.reservation.dateTime}}</td>
+                    <td>{{res.reservation.dateTime  | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{res.reservation.duration + " sata"}}</td>
                     <td>
                         <ul class="list-group" >

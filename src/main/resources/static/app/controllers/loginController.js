@@ -27,7 +27,7 @@
 
 
         $scope.register = function(){
-            $http.post('/users/existsEmail',$scope.newuser.email)
+            $http.post('/users/existsEmail',$scope.newUser.email)
                 .success(function(response){
                     if(response == false){
                         $http.put('/guests/create', $scope.newUser)
