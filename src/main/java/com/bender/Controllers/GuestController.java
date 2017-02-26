@@ -63,10 +63,11 @@ public class GuestController {
         ArrayList<Guest> addableGuests = new ArrayList<>();
 
         for(Guest g : allGuests){
-            if(!guest.getFriends().contains(g))
-                if(!guest.getRequests().contains(g))
-                    if(!g.getRequests().contains(guest))
-                        addableGuests.add(g);
+            if(!g.equals(guest))
+                if(!guest.getFriends().contains(g))
+                    if(!guest.getRequests().contains(g))
+                        if(!g.getRequests().contains(guest))
+                            addableGuests.add(g);
         }
         return addableGuests;
     }

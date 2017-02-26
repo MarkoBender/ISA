@@ -57,7 +57,7 @@
                 <tbody>
                 <tr ng-repeat="inv in notConfirmed">
                     <td>{{inv.reservation.rastaurant.name}}</td>
-                    <td>{{inv.reservation.dateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                    <td>{{inv.reservation.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{inv.reservation.duration + " sata"}}</td>
                     <td>{{inv.reservation.host.name}}</td>
                     <td><button class="btn btn-success" ng-click="potvrdi(inv)">Dolazim</button></td>
@@ -84,10 +84,9 @@
                         <thead>
                         <tr>
                             <th>Naziv</th>
-                            <th>Datum</th>
-                            <th>Trajanje</th>
-                            <th>Pozivalac</th>
-                            <th>&nbsp;</th>
+                            <th>Opis</th>
+                            <th>Tip</th>
+                            <th>Cena</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
@@ -95,9 +94,9 @@
                         <tr ng-repeat="jelo in jelovnik">
                             <td>{{jelo.name}}</td>
                             <td>{{jelo.description}}</td>
-                            <td>{{jelo.cena}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{jelo.dish_type.name}}</td>
+                            <td>{{jelo.price}}</td>
+                            <td><button type="button" class="btn btn-primary" ng-click="naruci(jelo)" data-dismiss="modal">Naruci</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -105,7 +104,6 @@
 
                 <div class="modal-footer">
                     <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
-                    <button type="button" ng-disabled="broj_stola==null" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" data-target="#modal-3" >Dalje</button>
                 </div>
             </div>
         </div>

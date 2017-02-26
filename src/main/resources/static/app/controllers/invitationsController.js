@@ -26,6 +26,10 @@
         refresh();
 
 
+        $scope.naruci = function(jelo){
+            console.log(jelo);
+        }
+
         $scope.zapocni_narucivanje = function(restoran){
             $http.get('/dishes/menu/' + restoran.restaurant_id).success(function(response){
                 console.log("Dobijo sam jelovnik!");
