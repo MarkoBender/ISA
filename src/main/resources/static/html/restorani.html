@@ -56,7 +56,7 @@
                 <tbody>
                 <tr ng-repeat="res in visited">
                     <td>{{res.restaurant.name}}</td>
-                    <td>{{res.dateTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>{{res.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>4.7</td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-4">Oceni</button></td>
                 </tr>
@@ -88,6 +88,23 @@
                                             <form>
                                                 <input type="date" name="bday" ng-model="datum">
                                             </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vreme:</td>
+                                        <td>
+                                            <select ng-model="datum.hours">
+                                                <option value=1>1</option>
+                                                <option value=2>2</option>
+                                                <option value=3>3</option>
+
+                                            </select>
+                                            :
+                                            <select ng-model="datum.minutes">
+                                                <option value=15>15</option>
+                                                <option value=30>30</option>
+                                                <option value=40>45</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -137,7 +154,7 @@
                                     </tr>
                                     <tr>
                                         <td>Datum:</td>
-                                        <td>{{datum}}</td>
+                                        <td>{{datum | date:'yyyy-MM-dd HH:mm'}}</td>
                                     </tr>
                                     <tr>
                                         <td>Trajanje:</td>
@@ -189,7 +206,7 @@
                                     </tr>
                                     <tr>
                                         <td>Datum:</td>
-                                        <td>{{datum}}</td>
+                                        <td>{{datum | date:'yyyy-MM-dd HH:mm'}}</td>
                                     </tr>
                                     <tr>
                                         <td>Trajanje:</td>

@@ -25,6 +25,14 @@
 
         refresh();
 
+
+        $scope.zapocni_narucivanje = function(restoran){
+            $http.get('/dishes/menu/' + restoran.restaurant_id).success(function(response){
+                console.log("Dobijo sam jelovnik!");
+                $scope.jelovnik = response;
+            });
+        }
+
         $scope.potvrdi = function(pozivnica){
             $http.put('/invitations/confirmInvitation', pozivnica).success(function(response){
                 console.log("Postovo sam brt moj!");

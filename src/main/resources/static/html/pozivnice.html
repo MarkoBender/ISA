@@ -33,10 +33,10 @@
                 <tbody>
                 <tr ng-repeat="inv in confirmed">
                     <td>{{inv.reservation.restaurant.name}}</td>
-                    <td>{{inv.reservation.dateTime}}</td>
+                    <td>{{inv.reservation.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{inv.reservation.duration + " sata"}}</td>
                     <td>{{inv.reservation.host.name}}</td>
-                    <td><button class="btn btn-danger">Naruci</button></td>
+                    <td><button class="btn btn-danger" data-toggle="modal" data-target="#modal-narucivanje" ng-click="zapocni_narucivanje(inv.reservation.restaurant)">Naruci</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -57,7 +57,7 @@
                 <tbody>
                 <tr ng-repeat="inv in notConfirmed">
                     <td>{{inv.reservation.rastaurant.name}}</td>
-                    <td>{{inv.reservation.dateTime}}</td>
+                    <td>{{inv.reservation.dateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
                     <td>{{inv.reservation.duration + " sata"}}</td>
                     <td>{{inv.reservation.host.name}}</td>
                     <td><button class="btn btn-success" ng-click="potvrdi(inv)">Dolazim</button></td>
@@ -68,3 +68,47 @@
     </div>
 
 </div>
+
+
+
+<div class="container">
+    <div class="modal fade" id="modal-narucivanje">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Rezervacija - korak 2</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Datum</th>
+                            <th>Trajanje</th>
+                            <th>Pozivalac</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="jelo in jelovnik">
+                            <td>{{jelo.name}}</td>
+                            <td>{{jelo.description}}</td>
+                            <td>{{jelo.cena}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                    <button type="button" ng-disabled="broj_stola==null" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" data-target="#modal-3" >Dalje</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
