@@ -30,6 +30,7 @@
             $scope.friends = response;
         });
 
+
         $scope.logout = function (){
              $cookies.put('name', null);
              $cookies.put('id', null);

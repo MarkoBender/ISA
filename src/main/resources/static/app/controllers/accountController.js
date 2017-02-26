@@ -27,6 +27,7 @@
             $http.get('/guests/addable/' + $cookies.get('id')).success(function(response){
                 console.log("I got the data I requested!");
                 $scope.addable = response;
+                $scope.addableAll = response;
             });
             $http.get('/users/getOne/' + $cookies.get('id')).success(function(response){
                 $scope.user = response;
@@ -36,6 +37,17 @@
         refresh();
 
 
+        $scope.pretrazi = function(){
+            $scope.addable = new Array();
+            var i;
+            for (i = 0; i < $scope.addableAll.length; i++) {
+                if($scope.addableAll[i].name.includes($scope.pretragaIme) || $scope.pretragaIme==null){
+                    if($scope.addableAll[i].surname.includes($scope.pretragaPrezime) || $scope.pretragaPrezime==null){
+                        $scope.addable.push($scope.addableAll[i]);
+                    }
+                }
+            }
+        };
 
 
         $scope.izmeniNalog = function(){

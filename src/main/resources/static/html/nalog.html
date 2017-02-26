@@ -91,8 +91,9 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Dodaj prijatelja">
-                <input type="text" class="form-control" placeholder="Dodaj prijatelja">
+                <input type="text" class="form-control" ng-model="pretragaIme" placeholder="Ime">
+                <input type="text" class="form-control" ng-model="pretragaPrezime" placeholder="Prezime">
+                <button class="btn btn-success" ng-click="pretrazi()">Pretrazi</button>
             </div>
             <table class="table">
                 <thead>
