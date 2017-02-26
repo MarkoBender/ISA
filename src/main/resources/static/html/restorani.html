@@ -26,16 +26,21 @@
                     <th>Ocena</th>
                     <th>Ocena prijatelja</th>
                     <th>Udaljenost</th>
-                    <th>Action</th>
-                    <th>&nbsp;</th>
+                    <th>
+                        <select ng-model="sortiranje">
+                            <option value='name'>Naziv</option>
+                            <option value='description'>Opis</option>
+                            <option value='distance'>Udaljenost</option>
+                        </select>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="res in restaurants">
+                <tr ng-repeat="res in restaurants | orderBy:sortiranje">
                     <td>{{res.name}}</td>
-                    <td>{{res.ocena}}</td>
-                    <td>{{res.ocenaP}}</td>
                     <td>{{res.description}}</td>
+                    <td></td>
+                    <td>{{res.distance | number : 1 }} km</td>
                     <td><button type="button" class="btn btn-success" data-toggle="modal" ng-click="zapocniRezervaciju(res)" data-target="#modal-1">Rezervisi</button></td>
                 </tr>
                 </tbody>
@@ -285,7 +290,13 @@
                                 <td>Ocena restorana:</td>
                                 <td>
                                     <div class="rating">
-                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                        <select ng-model="ocenaRestorana">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
@@ -293,7 +304,13 @@
                                 <td>Ocena konobara:</td>
                                 <td>
                                     <div class="rating">
-                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                        <select ng-model="ocenaKonobara">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
@@ -301,7 +318,13 @@
                                 <td>Ocena jela:</td>
                                 <td>
                                     <div class="rating">
-                                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                        <select ng-model="ocenaJela">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>

@@ -8,10 +8,21 @@
     RestorauntsController.$inject = ['$cookies','$http','$scope'];
     function RestorauntsController($cookies,$http,$scope) {
 
-        $http.get('/restaurants/all').success(function(response){
-            console.log("I got the data I requested!");
-            $scope.restaurants = response;
+        $http.get('http://ip-api.com/json')
+            .success(function(coordinates) {
+                $scope.mylat = coordinates.lat;
+                $scope.mylng = coordinates.lon;
+            $http.get('/restaurants/all').success(function(response){
+                console.log("I got the data I requested!");
+                $scope.restaurants = response;
+                var i;
+                for (i = 0; i < $scope.restaurants.length; i++) {
+                    $scope.restaurants[i].distance = getDist($scope.restaurants[i].lat,$scope.restaurants[i].lng);
+                }
+            });
         });
+
+
 
         $http.get('/reservations/allInactive/' + $cookies.get('id')).success(function(response){
             $scope.visited = response;
@@ -22,7 +33,41 @@
             });
         });
 
+        $scope.proba = function(){
+            console.log("EO GA!");
+        }
 
+        function getDist(lat,lon) {
+          var R = 6371; // Radius of the earth in km
+          var dLat = deg2rad(lat-$scope.mylat);  // deg2rad below
+          var dLon = deg2rad(lon-$scope.mylng);
+          var a =
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad($scope.mylat)) * Math.cos(deg2rad(lat)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+            ;
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          var d = R * c; // Distance in km
+          return d;
+        }
+
+        $scope.getDistanceFromLatLonInKm = function(lat,lon) {
+          var R = 6371; // Radius of the earth in km
+          var dLat = deg2rad(lat-$scope.mylat);  // deg2rad below
+          var dLon = deg2rad(lon-$scope.mylng);
+          var a =
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad($scope.mylat)) * Math.cos(deg2rad(lat)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+            ;
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          var d = R * c; // Distance in km
+          return d;
+        }
+
+        function deg2rad(deg) {
+          return deg * (Math.PI/180)
+        }
 
         console.log('/guests/friends/' + $cookies.get('id'));
         $http.get('/guests/friends/' + $cookies.get('id')).success(function(response){
