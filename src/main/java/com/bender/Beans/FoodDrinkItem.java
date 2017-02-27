@@ -29,14 +29,18 @@ public class FoodDrinkItem {
     @ManyToOne
     private Restaurant restaurant;
 
+    @Column
+    private String tip;
+
     public FoodDrinkItem(){}
 
-    public FoodDrinkItem(long foodDrinkItem_id, String name, double price, String description, Restaurant restaurant) {
+    public FoodDrinkItem(long foodDrinkItem_id, String name, double price, String description, Restaurant restaurant, String tip) {
         this.foodDrinkItem_id = foodDrinkItem_id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.restaurant = restaurant;
+        this.tip = tip;
     }
 
     public long getFoodDrinkItem_id() {
@@ -77,5 +81,13 @@ public class FoodDrinkItem {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
     }
 }

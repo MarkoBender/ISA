@@ -85,6 +85,11 @@
                                                     controller: 'WWWkuvarNalogController'
                                                 });
 
+        $routeProvider.when('/WWWkuvarRasporedRada', {
+                                            templateUrl: 'html/WWWkuvarRasporedRada.html',
+                                            controller: 'WWWkuvarRasporedRadaController'
+                                        });
+
         $routeProvider.when('/WWWkonobar', {
                                     templateUrl: 'html/WWWkonobar.html',
                                     controller: 'WWWkonobarController'
@@ -95,6 +100,11 @@
                                             controller: 'WWWkonobarNalogController'
                                         });
 
+        $routeProvider.when('/WWWkonobarRasporedRada', {
+                                    templateUrl: 'html/WWWkonobarRasporedRada.html',
+                                    controller: 'WWWkonobarRasporedRadaController'
+                                });
+
         $routeProvider.when('/WWWsanker', {
                                             templateUrl: 'html/WWWsanker.html',
                                             controller: 'WWWsankerController'
@@ -104,6 +114,13 @@
                     templateUrl: 'html/WWWsankerNalog.html',
                     controller: 'WWWsankerNalogController'
                 });
+        $routeProvider.when('/WWWsankerRasporedRada', {
+                            templateUrl: 'html/WWWsankerRasporedRada.html',
+                            controller: 'WWWsankerRasporedRadaController'
+                        });
+
+
+
 
         $routeProvider.when('/noviponudjac', {
             templateUrl: 'html/vuksa.html',

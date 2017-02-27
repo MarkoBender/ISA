@@ -1,9 +1,5 @@
 package com.bender.Beans;
 
-import com.bender.Models.OrderItem;
-import com.bender.Models.RestaurantTable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
