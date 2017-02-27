@@ -1,30 +1,23 @@
-package com.bender.Models;
-
-import com.bender.Beans.Restaurant;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.bender.Beans;
 
 import javax.persistence.*;
 
 /**
- * Created by User on 2/25/2017.
+ * Created by Nikola on 26-02-17.
  */
-//@Entity
+@Entity
 public class RestaurantTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long restaurantTable_id;
+    private long restaurant_table_id;
 
-    @Column
     private double xvalue;
 
-    @Column
     private double yvalue;
 
-    @Column
     private double width;
 
-    @Column
     private double height;
 
     @ManyToOne
@@ -35,8 +28,8 @@ public class RestaurantTable {
 
     public RestaurantTable(){}
 
-    public RestaurantTable(long restaurantTable_id, double xvalue, double yvalue, double width, double height, RestaurantRegion restaurantRegion, Restaurant restaurant) {
-        this.restaurantTable_id = restaurantTable_id;
+    public RestaurantTable(long restaurant_table_id, double xvalue, double yvalue, double width, double height, RestaurantRegion restaurantRegion, Restaurant restaurant) {
+        this.restaurant_table_id = restaurant_table_id;
         this.xvalue = xvalue;
         this.yvalue = yvalue;
         this.width = width;
@@ -45,12 +38,12 @@ public class RestaurantTable {
         this.restaurant = restaurant;
     }
 
-    public long getRestaurantTable_id() {
-        return restaurantTable_id;
+    public long getRestaurant_table_id() {
+        return restaurant_table_id;
     }
 
-    public void setRestaurantTable_id(long restaurantTable_id) {
-        this.restaurantTable_id = restaurantTable_id;
+    public void setRestaurant_table_id(long restaurant_table_id) {
+        this.restaurant_table_id = restaurant_table_id;
     }
 
     public double getXvalue() {

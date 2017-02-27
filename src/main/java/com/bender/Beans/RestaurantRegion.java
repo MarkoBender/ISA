@@ -1,45 +1,36 @@
-package com.bender.Models;
-
-import com.bender.Beans.Restaurant;
+package com.bender.Beans;
 
 import javax.persistence.*;
 
 /**
- * Created by User on 2/25/2017.
+ * Created by Nikola on 26-02-17.
  */
-//@Entity
+@Entity
 public class RestaurantRegion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long restaurantRegion_id;
+    private long restaurant_region_id;
 
-    @Column
     private String name;
 
-    @Column
     private double xvalue;
 
-    @Column
     private double yvalue;
 
-    @Column
     private double width;
 
-    @Column
     private double height;
 
-    @Column
     private String color;
 
-    //lazy, all
     @ManyToOne
     private Restaurant restaurant;
 
     public RestaurantRegion(){}
 
-    public RestaurantRegion(long restaurantRegion_id, String name, double xvalue, double yvalue, double width, double height, String color, Restaurant restaurant) {
-        this.restaurantRegion_id = restaurantRegion_id;
+    public RestaurantRegion(long restaurant_region_id, String name, double xvalue, double yvalue, double width, double height, String color, Restaurant restaurant) {
+        this.restaurant_region_id = restaurant_region_id;
         this.name = name;
         this.xvalue = xvalue;
         this.yvalue = yvalue;
@@ -49,12 +40,12 @@ public class RestaurantRegion {
         this.restaurant = restaurant;
     }
 
-    public long getRestaurantRegion_id() {
-        return restaurantRegion_id;
+    public long getRestaurant_region_id() {
+        return restaurant_region_id;
     }
 
-    public void setRestaurantRegion_id(long restaurantRegion_id) {
-        this.restaurantRegion_id = restaurantRegion_id;
+    public void setRestaurant_region_id(long restaurant_region_id) {
+        this.restaurant_region_id = restaurant_region_id;
     }
 
     public String getName() {

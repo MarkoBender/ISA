@@ -150,6 +150,10 @@
                     controller: 'noviradnikController'
         });
 
+        $routeProvider.when('/rasporedstolova/', {
+                    templateUrl: 'html/rasporedSedenja.html',
+                    controller: 'rasporedsedenjaController'
+        });
         $routeProvider.otherwise({});
     }]);
 })();

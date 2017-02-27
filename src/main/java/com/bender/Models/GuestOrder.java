@@ -1,9 +1,6 @@
 package com.bender.Models;
 
-import com.bender.Beans.Guest;
-import com.bender.Beans.Reservation;
-import com.bender.Beans.Restaurant;
-import com.bender.Beans.Steward;
+import com.bender.Beans.*;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -1,0 +1,53 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/konkursi">Pregled svih konkursa</a></li>
+                    <li><a href="#/profilrestorana">Profil restorana</a></li>
+                    <li><a href="#/noviponudjac">Novi ponudjac</a></li>
+                    <li><a href="#/noviradnik">Novi radnik</a></li>
+                    <li class="active"><a href="#/rasporedstolova">Raspored stolova<span class="sr-only">(current)</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <h3>Izaberite radnju sa stolovima</h3>
+    <form>
+        <input type="radio" name="gender" ng-model="tableaction" value="add"> Dodavanje
+        <input type="radio" name="gender" ng-model="tableaction" value="edit"> Izmena
+        <input type="radio" name="gender" ng-model="tableaction" value="delete"> Brisanje
+        <input type="radio" name="gender" ng-model="tableaction" value="test"> Novi region
+    </form>
+    <div style="float:left;width:60%;">
+        <svg width="700" height="600" id="svgcontainer"  ng-mousedown="startDrag($event)" ng-mouseup="finishDrag($event)">
+            <rect width="700" height="600" style="fill:rgb(232,237,204);stroke-width:3;stroke:rgb(204,255,204)" />
+            <rect ng-repeat="region in regions" ng-attr-x={{region.xvalue}} ng-attr-y={{region.yvalue}} rx="5" ry="5" ng-attr-width={{region.width}} ng-attr-height={{region.height}}
+                 style="fill:{{region.color}};stroke:black;stroke-width:5;opacity:0.2" transform="translate(0,0)" ng-click="doClick($event)" />
+            <rect  ng-repeat ="table in tables"  ng-attr-x={{table.xvalue}}  ng-attr-y={{table.yvalue}} rx="5" ry="5"
+                   ng-attr-width={{table.width}}  ng-attr-height={{table.height}} style="fill:red;stroke:black;stroke-width:5;opacity:0.8" transform="translate(0,0)"
+            ng-mousedown = "selectElement($event)" ng-mousemove="moveElement($event)" ng-mouseup="dropElement()"  />
+        </svg>
+    </div>
+    <div style="float:right;width:30%;">
+        <label>Naziv regiona</label>
+        <input type="text" ng-model = "newregion.name" class="form-control">
+        <label>Boja regiona</label>
+        <select class="form-control" ng-model="newregion.color">
+            <option value=""></option>
+            <option value="blue">plava</option>
+            <option value="yellow">zuta</option>
+            <option value="green">zelena</option>
+            <option value="gray">siva</option>
+            <option value="brown">braon</option>
+            <option value="orange">narandzasta</option>
+            <option value="purple">ljubicasta</option>
+        </select>
+    </div>
+</div>

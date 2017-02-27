@@ -2,6 +2,7 @@ package com.bender.Models;
 
 import com.bender.Beans.Employee;
 import com.bender.Beans.Restaurant;
+import com.bender.Beans.RestaurantRegion;
 
 import javax.persistence.*;
 import java.util.Date;
