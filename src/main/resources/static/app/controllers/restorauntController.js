@@ -141,23 +141,8 @@
                             $scope.selectedElement.style.fill = 'red';
                             delete dict[$scope.id];
                         }
-
-                        //for (var key in dict) {
-                            //$scope.selectedElement.style.fill = 'green';
-                            /*if(dict[key]==true){
-                                $scope.selectedElement.style.fill = 'green';
-                            }
-                            else{
-                                $scope.selectedElement.style.fill = 'red';
-                                delete dict[key];
-                            }*/
-                        //}
-
-
                         console.log($scope.id);
                         console.log(dict);
-                        //console.log($scope.X);
-                        //console.log($scope.Y);
                     }
                 }
             });

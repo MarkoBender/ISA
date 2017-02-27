@@ -25,14 +25,26 @@ public class Reservation {
 
     private int duration;
 
+    @ManyToMany
+    private List<RestaurantTable> tables;
+
     public Reservation(){}
 
-    public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration) {
+    /*public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration) {
         this.reservation_id = reservation_id;
         this.restaurant = restaurant;
         this.host = host;
         this.dateTime = dateTime;
         this.duration = duration;
+    }*/
+
+    public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration, List<RestaurantTable> tables) {
+        this.reservation_id = reservation_id;
+        this.restaurant = restaurant;
+        this.host = host;
+        this.dateTime = dateTime;
+        this.duration = duration;
+        this.tables = tables;
     }
 
     public long getReservation_id() {
@@ -73,5 +85,13 @@ public class Reservation {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public List<RestaurantTable> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<RestaurantTable> tables) {
+        this.tables = tables;
     }
 }
