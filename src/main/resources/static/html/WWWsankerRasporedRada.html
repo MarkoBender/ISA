@@ -31,8 +31,8 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="ds in dailySchedules">
-                    <td>{{ds.dateStart}}</td>
-                    <td>{{ds.dateEnd}}</td>
+                    <td>{{ds.startday | date:'dd-MM-yyyy' }}</td>
+                    <td>{{ds.endday | date:'dd-MM-yyyy' }}</td>
                     <td>{{ds.startHours}}:{{ds.startMinutes}}</td>
                     <td>{{ds.endHours}}:{{ds.endMinutes}}</td>
                     <td>&nbsp;</td>

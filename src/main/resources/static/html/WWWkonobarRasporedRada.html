@@ -39,8 +39,8 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="ds in dailySchedules">
-                    <td>{{ds.dateStart}}</td>
-                    <td>{{ds.dateEnd}}</td>
+                    <td>{{ds.startday | date:'dd-MM-yyyy' }}</td>
+                    <td>{{ds.endday | date:'dd-MM-yyyy' }}</td>
                     <td>{{ds.startHours}}:{{ds.startMinutes}}</td>
                     <td>{{ds.endHours}}:{{ds.endMinutes}}</td>
                     <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1" ng-click="vidiDodeljenRegion(ds.restaurantRegion)">Vidi dodeljen region</button></td>
@@ -69,6 +69,9 @@
                                     <rect  ng-repeat ="table in tables"  ng-attr-x={{table.xvalue}}  ng-attr-y={{table.yvalue}} rx="5" ry="5"
                                            ng-attr-width={{table.width}}  ng-attr-height={{table.height}} style="fill:red;stroke:black;stroke-width:5;opacity:0.8" transform="translate(0,0)"
                                           />
+                                    <rect  ng-model="restaurantRegion"  ng-attr-x={{restaurantRegion.xvalue}}  ng-attr-y={{restaurantRegion.yvalue}} rx="10" ry="10"
+                                           ng-attr-width={{restaurantRegion.width}}  ng-attr-height={{restaurantRegion.height}} style="fill:black;stroke:black;stroke-width:10;opacity:0.5" transform="translate(0,0)"
+                                    />
                                 </svg>
                             </div>
                         </div>

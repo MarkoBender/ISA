@@ -15,7 +15,7 @@
                                 .success(function(response){
                                     $scope.loggedUser = response;
                                     $scope.cook = response;
-                                    $http.post('/dailySchedules/forEmployee',$scope.loggedUser).success(function(response)){
+                                    $http.post('/schedules/forEmployee',$scope.loggedUser).success(function(response){
                                                                             $scope.dailySchedules=response;
                                                                         });
                                 });
@@ -27,4 +27,4 @@
                 }
 
      }
- })();
+})();
