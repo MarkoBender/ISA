@@ -110,6 +110,7 @@
         };
 
         var dict={};
+        var RRID=-1;
 
         $scope.selectElement = function(evt) {
             var oldX = evt.offsetX;
@@ -128,19 +129,19 @@
                         $scope.X = value.xvalue;
                         $scope.Y = value.yvalue;
 
-                        console.log(value);
+                        var resregID=value.restaurantRegion.restaurant_region_id;
 
-                        //$scope.regionID=value.restaurantRegion.restaurant_region_id;
+                        $scope.regionID=value.restaurantRegion.restaurant_region_id;
 
                         if(!dict[$scope.id]){
                             $scope.selectedElement.style.fill = 'green';
-                            //dict[$scope.id] = $scope.regionID;
-                            dict[$scope.id] = true;
+                            dict[$scope.id] = RRID;
                         }
                         else{
                             $scope.selectedElement.style.fill = 'red';
                             delete dict[$scope.id];
                         }
+
                         console.log($scope.id);
                         console.log(dict);
                     }

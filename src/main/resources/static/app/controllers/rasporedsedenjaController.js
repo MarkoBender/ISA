@@ -64,6 +64,11 @@
                                 if(offsetX > value.xvalue && offsetX < value.xvalue + value.width){
                                     if(offsetY > value.yvalue && offsetY < value.yvalue + value.height){
                                         $scope.newtable.restaurantRegion = value;
+                                        $http.put('/restauranttables/create',$scope.newtable)
+                                                                .success(function(response){
+                                                                    console.log('created table!');
+                                                                    //$window.location.reload();
+                                                                });
                                     }
                                 }
                             })
@@ -76,11 +81,12 @@
                     angular.element(document.getElementById('svgcontainer')).append(compiledeHTML);
 
                     console.log($scope);
-                    $http.put('/restauranttables/create',$scope.newtable)
+                    $window.location.reload();
+                    /*$http.put('/restauranttables/create',$scope.newtable)
                         .success(function(response){
                             console.log('created table!');
                             $window.location.reload();
-                        });
+                        });*/
 
                 }
              };
