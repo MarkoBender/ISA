@@ -17,4 +17,30 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Raspored rada:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Datum od:</th>
+                    <th>Datum do:</th>
+                    <th>Vreme od:</th>
+                    <th>Vreme do:</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ds in dailySchedules">
+                    <td>{{ds.dateStart}}</td>
+                    <td>{{ds.dateEnd}}</td>
+                    <td>{{ds.startHours}}:{{ds.startMinutes}}</td>
+                    <td>{{ds.endHours}}:{{ds.endMinutes}}</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

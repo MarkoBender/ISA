@@ -1,6 +1,6 @@
 package com.bender.Models;
 
-import com.bender.Beans.FoodDrinkItem;
+import com.bender.Beans.*;
 
 import javax.persistence.*;
 
@@ -15,21 +15,37 @@ public class OrderItem {
     private long orderItem_id;
 
     @ManyToOne
-    private FoodDrinkItem foodDrinkItem;
+    private Dish dish;
+
+    @ManyToOne
+    private Drink drink;
+
+    @ManyToOne
+    private Reservation reservation;
 
     @Column
-    private int amount;
+    private String statusOfDrink;
 
     @Column
-    private String status;
+    private String statusOfDish;
+
+    @ManyToOne
+    private Steward steward;
+
+    @ManyToOne
+    private Cook cook;
 
     public OrderItem(){}
 
-    public OrderItem(long orderItem_id, FoodDrinkItem foodDrinkItem, int amount, String status) {
+    public OrderItem(long orderItem_id, Dish dish, Drink drink, Reservation reservation, String statusOfDrink, String statusOfDish, Steward steward, Cook cook) {
         this.orderItem_id = orderItem_id;
-        this.foodDrinkItem = foodDrinkItem;
-        this.amount = amount;
-        this.status = status;
+        this.dish = dish;
+        this.drink = drink;
+        this.reservation = reservation;
+        this.statusOfDrink = statusOfDrink;
+        this.statusOfDish = statusOfDish;
+        this.steward = steward;
+        this.cook = cook;
     }
 
     public long getOrderItem_id() {
@@ -40,27 +56,59 @@ public class OrderItem {
         this.orderItem_id = orderItem_id;
     }
 
-    public FoodDrinkItem getFoodDrinkItem() {
-        return foodDrinkItem;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setFoodDrinkItem(FoodDrinkItem foodDrinkItem) {
-        this.foodDrinkItem = foodDrinkItem;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 
-    public int getAmount() {
-        return amount;
+    public Drink getDrink() {
+        return drink;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setDrink(Drink drink) {
+        this.drink = drink;
     }
 
-    public String getStatus() {
-        return status;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public String getStatusOfDrink() {
+        return statusOfDrink;
+    }
+
+    public void setStatusOfDrink(String statusOfDrink) {
+        this.statusOfDrink = statusOfDrink;
+    }
+
+    public String getStatusOfDish() {
+        return statusOfDish;
+    }
+
+    public void setStatusOfDish(String statusOfDish) {
+        this.statusOfDish = statusOfDish;
+    }
+
+    public Steward getSteward() {
+        return steward;
+    }
+
+    public void setSteward(Steward steward) {
+        this.steward = steward;
+    }
+
+    public Cook getCook() {
+        return cook;
+    }
+
+    public void setCook(Cook cook) {
+        this.cook = cook;
     }
 }

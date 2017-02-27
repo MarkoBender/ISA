@@ -15,13 +15,30 @@
                                 .success(function(response){
                                     $scope.loggedUser = response;
                                     $scope.steward = response;
+                                    $http.post('/dailySchedules/forEmployee',$scope.loggedUser).success(function(response)){
+                                        $scope.dailySchedules=response;
+                                    });
                                 });
+
+        $scope.vidiDodeljenRegion = function(region){
+            $http.post('/restaurantregions/forRestaurant',$scope.loggedUser.restaurant)
+                .success(function(response){
+                    $scope.regions = response;
+                    console.log($scope);
+                });
+            $http.post('/restauranttables/forRestaurant',$scope.loggedUser.restaurant)
+                .success(function(response){
+                    $scope.tables = response;
+                    console.log($scope);
+                });
+
+
+        }
 
         $scope.logout = function (){
                      $cookies.put('name', null);
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
                 }
-
      }
  })();

@@ -15,6 +15,9 @@
                                 .success(function(response){
                                     $scope.loggedUser = response;
                                     $scope.barman = response;
+                                    $http.post('/dailySchedules/forEmployee',$scope.loggedUser).success(function(response)){
+                                                                            $scope.dailySchedules=response;
+                                                                        });
                                 });
 
         $scope.logout = function (){

@@ -1,5 +1,6 @@
 package com.bender.Models;
 
+import com.bender.Beans.Reservation;
 import com.bender.Beans.Steward;
 
 import javax.persistence.*;
@@ -26,16 +27,16 @@ public class Bill {
     private Steward steward;
 
     @OneToOne
-    private List<GuestOrder> orders;
+    private Reservation reservation;
 
     public Bill(){}
 
-    public Bill(long bill_id, double price, Date date, Steward steward, List<GuestOrder> orders) {
+    public Bill(long bill_id, double price, Date date, Steward steward, Reservation reservation) {
         this.bill_id = bill_id;
         this.price = price;
         this.date = date;
         this.steward = steward;
-        this.orders = orders;
+        this.reservation = reservation;
     }
 
     public long getBill_id() {
@@ -70,11 +71,11 @@ public class Bill {
         this.steward = steward;
     }
 
-    public List<GuestOrder> getOrders() {
-        return orders;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setOrders(List<GuestOrder> orders) {
-        this.orders = orders;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 }

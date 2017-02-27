@@ -16,4 +16,63 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Raspored rada:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Datum od:</th>
+                    <th>Datum do:</th>
+                    <th>Vreme od:</th>
+                    <th>Vreme do:</th>
+                    <th>Region:</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ds in dailySchedules">
+                    <td>{{ds.dateStart}}</td>
+                    <td>{{ds.dateEnd}}</td>
+                    <td>{{ds.startHours}}:{{ds.startMinutes}}</td>
+                    <td>{{ds.endHours}}:{{ds.endMinutes}}</td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1" ng-click="vidiDodeljenRegion(ds.restaurantRegion)">Vidi dodeljen region</button></td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Dodavanje novog menadzera restorana</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="border: 1px solid black">
+                                <svg width="700" height="600" id="svgcontainer" >
+                                    <rect width="700" height="600" style="fill:rgb(232,237,204);stroke-width:3;stroke:rgb(204,255,204)" />
+                                    <rect ng-repeat="region in regions" ng-attr-x={{region.xvalue}} ng-attr-y={{region.yvalue}} rx="5" ry="5" ng-attr-width={{region.width}} ng-attr-height={{region.height}}
+                                          style="fill:{{region.color}};stroke:black;stroke-width:5;opacity:0.2" transform="translate(0,0)" />
+                                    <rect  ng-repeat ="table in tables"  ng-attr-x={{table.xvalue}}  ng-attr-y={{table.yvalue}} rx="5" ry="5"
+                                           ng-attr-width={{table.width}}  ng-attr-height={{table.height}} style="fill:red;stroke:black;stroke-width:5;opacity:0.8" transform="translate(0,0)"
+                                          />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
