@@ -152,6 +152,11 @@
                     controller: 'jelovnikController'
         });
 
+        $routeProvider.when('/kartapica', {
+                            templateUrl: 'html/kartapica.html',
+                            controller: 'kartapicaController'
+                });
+
         $routeProvider.when('/salesmanaccount', {
                     templateUrl: 'html/salesmanaccount.html',
                     controller: 'salesmanaccountController'

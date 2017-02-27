@@ -50,4 +50,23 @@
             <option value="purple">ljubicasta</option>
         </select>
     </div>
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Svi dodati regioni</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Boja</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="region in regions">
+                    <td>{{region.name}}</td>
+                    <td>{{region.color}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

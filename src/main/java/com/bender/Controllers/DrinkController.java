@@ -1,8 +1,8 @@
 package com.bender.Controllers;
 
-import com.bender.Beans.Dish;
+import com.bender.Beans.Drink;
 import com.bender.Beans.Restaurant;
-import com.bender.Repositories.DishRepository;
+import com.bender.Repositories.DrinkRepository;
 import com.bender.Repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,37 +10,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Created by Nikola on 16-02-17.
+ * Created by Nikola on 27-02-17.
  */
 @RestController
-@RequestMapping(value="/dishes")
-public class DishController {
+@RequestMapping(value="/drinks")
+public class DrinkController {
 
-    private DishRepository repository;
+    private DrinkRepository repository;
     private RestaurantRepository restaurantRepository;
 
     @Autowired
-    public DishController(DishRepository repository,RestaurantRepository restaurantRepository){
+    public DrinkController(DrinkRepository repository,RestaurantRepository restaurantRepository){
         this.repository = repository;
         this.restaurantRepository = restaurantRepository;
     }
 
     @RequestMapping(value = "/all" , method = RequestMethod.GET)
-    public List<Dish> getAll(){
+    public List<Drink> getAll(){
         return repository.findAll();
     }
 
     @RequestMapping(value = "/menu/{id}")
-    public List<Dish> getMenu(@PathVariable long id){
+    public List<Drink> getMenu(@PathVariable long id){
         Restaurant myrestaurant = restaurantRepository.findOne(id);
-        List<Dish> mymenu = repository.findByRestaurant(myrestaurant);
+        List<Drink> mymenu = repository.findByRestaurant(myrestaurant);
         return mymenu;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
-    public void create(@RequestBody Dish newdish) {
-        newdish.setTip("Food");
-        repository.save(newdish);
+    public void create(@RequestBody Drink newdrink) {
+        newdrink.setTip("Drink");
+        repository.save(newdrink);
     }
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
@@ -49,9 +49,9 @@ public class DishController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable long id, @RequestBody Dish updatedDish) {
-        Dish dish = updatedDish;
+    public void update(@PathVariable long id, @RequestBody Drink updatedDrink) {
+        Drink drink = updatedDrink;
         //dish.setDish_id(id);
-        repository.save(dish);
+        repository.save(drink);
     }
 }

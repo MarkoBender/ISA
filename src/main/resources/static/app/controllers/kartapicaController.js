@@ -3,22 +3,22 @@
 
     angular
         .module('app')
-        .controller('jelovnikController', jelovnikController);
+        .controller('kartapicaController', kartapicaController);
 
-    jelovnikController.$inject = ['$cookies','$http','$scope'];
-    function jelovnikController($cookies,$http,$scope) {
+    kartapicaController.$inject = ['$cookies','$http','$scope'];
+    function kartapicaController($cookies,$http,$scope) {
 
         $scope.newdish = {};
          $http.get('/restaurantManagers/findOne/'+$cookies.get('id'))
                      .success(function(response){
                          $scope.loggedUser = response;
-                         $http.get('/dishes/menu/'+$scope.loggedUser.restaurant.restaurant_id)
+                         $http.get('/drinks/menu/'+$scope.loggedUser.restaurant.restaurant_id)
                             .success(function(response){
                                  $scope.menu = response;
                             });
                      });
 
-        $http.get('/dishtypes/all')
+        $http.get('/drinktypes/all')
             .success(function(response){
                 $scope.dishtypes = response;
             });
@@ -30,7 +30,7 @@
         };
 
         $scope.create = function (){
-            $http.put('/dishes/create',$scope.newdish)
+            $http.put('/drinks/create',$scope.newdish)
                 .success(function(response){
                     console.log("Dodao dish na meni!");
                 });
@@ -42,9 +42,9 @@
 
         $scope.update = function(){
             console.log($scope);
-            $http.put('/dishes/update/'+$scope.updateddish.foodDrinkItem_id,$scope.updateddish)
+            $http.put('/drinks/update/'+$scope.updateddish.foodDrinkItem_id,$scope.updateddish)
                 .success(function(response){
-                    console.log("Dish updated");
+                    console.log("Drink updated");
                 });
         }
 
