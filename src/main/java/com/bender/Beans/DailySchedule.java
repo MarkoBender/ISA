@@ -1,4 +1,4 @@
-package com.bender.Models;
+package com.bender.Beans;
 
 import com.bender.Beans.Employee;
 import com.bender.Beans.Restaurant;
@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by User on 2/26/2017.
  */
-//@Entity
+@Entity
 public class DailySchedule {
 
     @Id
@@ -21,7 +21,10 @@ public class DailySchedule {
     private Employee employee;
 
     @Column
-    private Date day;
+    private Date startday;
+
+    @Column
+    private Date endday;
 
     @Column
     private int startHours;
@@ -43,10 +46,11 @@ public class DailySchedule {
 
     public DailySchedule(){}
 
-    public DailySchedule(long dailySchedule_id, Employee employee, Date day, int startHours, int startMinutes, int endHours, int endMinutes, RestaurantRegion restaurantRegion, Restaurant restaurant) {
+    public DailySchedule(long dailySchedule_id, Employee employee, Date startday, Date endday, int startHours, int startMinutes, int endHours, int endMinutes, RestaurantRegion restaurantRegion, Restaurant restaurant) {
         this.dailySchedule_id = dailySchedule_id;
         this.employee = employee;
-        this.day = day;
+        this.startday = startday;
+        this.endday = endday;
         this.startHours = startHours;
         this.startMinutes = startMinutes;
         this.endHours = endHours;
@@ -71,12 +75,20 @@ public class DailySchedule {
         this.employee = employee;
     }
 
-    public Date getDay() {
-        return day;
+    public Date getStartday() {
+        return startday;
     }
 
-    public void setDay(Date day) {
-        this.day = day;
+    public void setStartday(Date startday) {
+        this.startday = startday;
+    }
+
+    public Date getEndday() {
+        return endday;
+    }
+
+    public void setEndday(Date endday) {
+        this.endday = endday;
     }
 
     public int getStartHours() {

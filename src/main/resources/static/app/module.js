@@ -197,14 +197,19 @@
                     controller: 'offersfororderController'
         });
 
-        $routeProvider.when('/noviradnik/', {
+        $routeProvider.when('/noviradnik', {
                     templateUrl: 'html/noviradnik.html',
                     controller: 'noviradnikController'
         });
 
-        $routeProvider.when('/rasporedstolova/', {
+        $routeProvider.when('/rasporedstolova', {
                     templateUrl: 'html/rasporedSedenja.html',
                     controller: 'rasporedsedenjaController'
+        });
+
+        $routeProvider.when('/dodavanjesmena', {
+                    templateUrl: 'html/dodavanjeSmena.html',
+                    controller: 'dodavanjesmenaController'
         });
         $routeProvider.otherwise({});
     }]);

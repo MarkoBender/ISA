@@ -1,0 +1,50 @@
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/konkursi">Pregled svih konkursa</a></li>
+                    <li><a href="#/profilrestorana">Profil restorana</a></li>
+                    <li><a href="#/noviponudjac">Novi ponudjac</a></li>
+                    <li><a href="#/noviradnik">Novi radnik</a></li>
+                    <li><a href="#/rasporedstolova">Raspored stolova</a></li>
+                    <li class="active"><a href="#/dodavanjesmena">Dodavanje smena<span class="sr-only">(current)</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li ><a href="#/nalog">Moj nalog</a></li>-->
+                    <li><a href="#">Izloguj se</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h3>Nova smena</h3>
+            <br>
+            <label>Radnik</label>
+            <select ng-model="newsched.employee" ng-options="radnik.email for radnik in employees"></select>
+            <br>
+            <div ng-show="newsched.employee.uloga == 'Steward' ">
+                <label>Region restorana</label>
+                <select ng-model="newsched.restaurantRegion" ng-options="region.name for region in regions"></select>
+            </div>
+            <br>
+            <label>Datum pocetka peroida smene </label><br>
+            <input type="date" ng-model = "newsched.startday" class="form-control">
+            <label>Datum kraja perioda smene </label><br>
+            <input type="date" ng-model = "newsched.endday" class="form-control">
+            <label>Vreme pocetka smene  </label><br>
+            <input type="number" ng-model = "newsched.startHours" class="form-control" min="0" max="23" required >
+            <input type="number" ng-model = "newsched.startMinutes" class="form-control" min="0" max="59" required >
+            <br>
+            <label>Vreme kraja smene </label><br>
+            <input type="number" ng-model = "newsched.endHours" class="form-control" min="0" max="23" required >
+            <input type="number" ng-model = "newsched.endMinutes" class="form-control" min="0" max="59" required >
+            <br>
+            <button type="button" class="btn btn-success" ng-click="newSchedule()">Dodaj smenu</button>
+            <br>
+        </div>
+    </div>
+</div>
