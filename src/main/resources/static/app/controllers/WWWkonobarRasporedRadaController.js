@@ -18,7 +18,17 @@
                                     $http.post('/dailySchedules/forEmployee',$scope.loggedUser).success(function(response)){
                                         $scope.dailySchedules=response;
                                     });
+
                                 });
+        /*$('#timetable').fullCalendar({
+          header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month, agendaWeek, agendaDay'
+          },
+          editable: false//,
+          //events: $scope.shifts
+         });*/
 
         $scope.vidiDodeljenRegion = function(region){
             $http.post('/restaurantregions/forRestaurant',$scope.loggedUser.restaurant)
