@@ -4,6 +4,8 @@ import com.bender.Beans.Guest;
 import com.bender.Beans.User;
 import com.bender.Repositories.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.*;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -21,6 +23,9 @@ public class GuestController {
     private GuestRepository repository;
 
     @Autowired
+    JavaMailSenderImpl sender;
+
+    @Autowired
     public GuestController(GuestRepository repository) {
         this.repository = repository;
 
@@ -32,8 +37,22 @@ public class GuestController {
 
     @RequestMapping(value = "/create" , method = RequestMethod.PUT)
     public void create(@RequestBody Guest newGuest){
-        newGuest.setUloga("Guest");
-        repository.save(newGuest);
+        //newGuest.setUloga("Guest");
+        //repository.save(newGuest);
+
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("marko.bender@live.com");
+        msg.setFrom("isa2017isa2017isa@gmail.com");
+        msg.setText("jedi gowna");
+        try{
+            sender.send(msg);
+            System.out.println("posalo");
+        }
+        catch (MailException ex) {
+            // simply log it and go on...
+            System.err.println(ex.getMessage());
+        }
     }
 
     @RequestMapping(value = "/friends/{id}")
