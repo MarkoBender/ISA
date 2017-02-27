@@ -92,8 +92,78 @@
             $scope.trajanje = null;
             $scope.datum = null;
             $scope.broj_stola = null;
+
+            $scope.selectedElement = 0;
+
+
             console.log(res);
+            $http.post('/restaurantregions/forRestaurant',$scope.restoran)
+                            .success(function(response){
+                                $scope.regions = response;
+                                console.log($scope);
+                                $http.post('/restauranttables/forRestaurant',$scope.restoran)
+                                                .success(function(response){
+                                                    $scope.tables = response;
+                                                    console.log($scope);
+                                                });
+                            });
         };
+
+        var dict={};
+
+        $scope.selectElement = function(evt) {
+            var oldX = evt.offsetX;
+            var oldY = evt.offsetY;
+
+            $scope.selectedElement = evt.target;
+
+            //console.log(oldX);
+            //console.log(oldY);
+            //console.log($scope.selectedElement);
+
+            angular.forEach($scope.tables,function(value,index){
+                if(oldX >= value.xvalue && oldX <= value.xvalue + value.width){
+                    if(oldY >= value.yvalue && oldY <= value.yvalue + value.height){
+                        $scope.id = value.restaurant_table_id;
+                        $scope.X = value.xvalue;
+                        $scope.Y = value.yvalue;
+
+                        console.log(value);
+
+                        //$scope.regionID=value.restaurantRegion.restaurant_region_id;
+
+                        if(!dict[$scope.id]){
+                            $scope.selectedElement.style.fill = 'green';
+                            //dict[$scope.id] = $scope.regionID;
+                            dict[$scope.id] = true;
+                        }
+                        else{
+                            $scope.selectedElement.style.fill = 'red';
+                            delete dict[$scope.id];
+                        }
+
+                        //for (var key in dict) {
+                            //$scope.selectedElement.style.fill = 'green';
+                            /*if(dict[key]==true){
+                                $scope.selectedElement.style.fill = 'green';
+                            }
+                            else{
+                                $scope.selectedElement.style.fill = 'red';
+                                delete dict[key];
+                            }*/
+                        //}
+
+
+                        console.log($scope.id);
+                        console.log(dict);
+                        //console.log($scope.X);
+                        //console.log($scope.Y);
+                    }
+                }
+            });
+
+
+        }
 
 
         var pozvaniPrijatelji = new Array();
