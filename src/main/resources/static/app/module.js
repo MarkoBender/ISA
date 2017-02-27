@@ -90,6 +90,11 @@
                                             controller: 'WWWkuvarRasporedRadaController'
                                         });
 
+        $routeProvider.when('/WWWkuvarPregledJela', {
+                                                    templateUrl: 'html/WWWkuvarPregledJela.html',
+                                                    controller: 'WWWkuvarPregledJelaController'
+                                                });
+
         $routeProvider.when('/WWWkonobar', {
                                     templateUrl: 'html/WWWkonobar.html',
                                     controller: 'WWWkonobarController'
@@ -105,6 +110,21 @@
                                     controller: 'WWWkonobarRasporedRadaController'
                                 });
 
+        $routeProvider.when('/WWWkonobarPregledNarudzbina', {
+                                                    templateUrl: 'html/WWWkonobarPregledNarudzbina.html',
+                                                    controller: 'WWWkonobarPregledNarudzbinaController'
+                                                    });
+
+        $routeProvider.when('/WWWkonobarPregledGotovihNarudzbina', {
+                                                            templateUrl: 'html/WWWkonobarPregledGotovihNarudzbina.html',
+                                                            controller: 'WWWkonobarPregledGotovihNarudzbinaController'
+                                                            });
+
+        $routeProvider.when('/WWWkonobarPregledPrihvacenihNarudzbina', {
+                                                            templateUrl: 'html/WWWkonobarPregledPrihvacenihNarudzbina.html',
+                                                            controller: 'WWWkonobarPregledPrihvacenihNarudzbinaController'
+                                                });
+
         $routeProvider.when('/WWWsanker', {
                                             templateUrl: 'html/WWWsanker.html',
                                             controller: 'WWWsankerController'
@@ -118,6 +138,16 @@
                             templateUrl: 'html/WWWsankerRasporedRada.html',
                             controller: 'WWWsankerRasporedRadaController'
                         });
+
+        $routeProvider.when('/WWWsankerPregledGotovihPica', {
+                                    templateUrl: 'html/WWWsankerPregledGotovihPica.html',
+                                    controller: 'WWWsankerPregledGotovihPicaController'
+                                });
+
+        $routeProvider.when('/WWWsankerPregledNarucenihPica', {
+                                            templateUrl: 'html/WWWsankerPregledNarucenihPica.html',
+                                            controller: 'WWWsankerPregledNarucenihPicaController'
+                                        });
 
 
 
