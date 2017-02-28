@@ -15,6 +15,11 @@
                                 .success(function(response){
                                     $scope.loggedUser = response;
                                     $scope.steward = response;
+                                    $http.post('/orderItems/findOrderItemForSteward/'+$cookies.get('region'),$scope.loggedUser)
+                                        .success(function(response){
+                                            $scope.myavalibleorders = response;
+                                            console.log($scope);
+                                        });
                                 });
 
         $scope.logout = function (){
@@ -22,6 +27,8 @@
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
                 }
+
+
 
      }
  })();

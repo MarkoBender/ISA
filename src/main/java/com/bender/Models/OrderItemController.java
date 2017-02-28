@@ -47,7 +47,10 @@ public class OrderItemController {
         List<OrderItem> tempOIS=new ArrayList<>();
 
         for(OrderItem oi: ois){
-            if(oi.getSteward().equals(steward) || oi.getSteward().equals(null)){
+            if(oi.getSteward() == null){
+                tempOIS.add(oi);
+            }
+            else if(oi.getSteward().equals(steward)){
                 tempOIS.add(oi);
             }
         }

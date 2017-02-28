@@ -53,6 +53,7 @@
                                                 if(potencijalno_dobro){
                                                     console.log("JEBENOOOOOOOOOOOOOOOOOOOO SAM U DOBROM VREMENU");
                                                     $scope.radi=true;
+                                                    $cookies.put('region',value.restaurantRegion.restaurant_region_id)
                                                     console.log($scope.radi);
                                                 }
                                             }

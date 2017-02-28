@@ -16,4 +16,27 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Pregled aktivnih narudzbina</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Objekat porudzbine</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="dish in menu">
+                    <td>{{dish.name}}</td>
+                    <td>{{dish.type.name}}</td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-2" ng-click="readyforupdate(dish)">Izmeni</button></td>
+                    <!--<th><button type="button" class="btn btn-success" ng-click="delete(dish.dish_id)">Izbrisi</button></th>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
