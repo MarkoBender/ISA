@@ -8,6 +8,12 @@
     noviradnikController.$inject = ['$cookies','$http','$scope','$window'];
     function noviradnikController($cookies,$http,$scope,$window) {
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
         $http.get('/dishtypes/all')
             .success(function(response){
                 $scope.dishtypes = response;

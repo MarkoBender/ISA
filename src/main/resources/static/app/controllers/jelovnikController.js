@@ -8,6 +8,12 @@
     jelovnikController.$inject = ['$cookies','$http','$scope'];
     function jelovnikController($cookies,$http,$scope) {
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
         $scope.newdish = {};
          $http.get('/restaurantManagers/findOne/'+$cookies.get('id'))
                      .success(function(response){

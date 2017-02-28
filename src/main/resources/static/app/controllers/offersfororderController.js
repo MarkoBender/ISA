@@ -10,6 +10,12 @@
 
         $scope.orderID = $routeParams.orderid;
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
         $http.get('/buyingorders/findOne/'+$scope.orderID)
             .success(function(response){
                 $scope.buyingOrder = response;

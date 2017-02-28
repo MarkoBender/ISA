@@ -8,6 +8,12 @@
     KonkursController.$inject = ['$cookies','$http','$scope'];
     function KonkursController($cookies,$http,$scope) {
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
         $http.get('/restaurantManagers/findOne/'+$cookies.get('id'))
             .success(function(response){
                 $scope.loggedUser = response;
