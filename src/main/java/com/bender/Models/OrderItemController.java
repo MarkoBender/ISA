@@ -120,7 +120,8 @@ public class OrderItemController {
                 resDate.setHours(resDate.getHours() + reservation.getDuration());
                 System.out.println("datum kraja je "+resDate+" a datum pocetka je "+reservation.getDateTime());
                 if (resDate.after(new Date()) && reservation.getDateTime().before(new Date())) {
-                    temp.add(res);
+                    if(!res.getStatus().equals("dostavljeno"))
+                        temp.add(res);
                 }
             }
         }
@@ -185,8 +186,9 @@ public class OrderItemController {
                 if(foodDrinkItem.getTip().equals("Food")) {
                     Dish dish=dishRepository.findOne(foodDrinkItem.getFoodDrinkItem_id());
                     if(dish.getDish_type().getDishtype_id()==cook.getDishType().getDishtype_id()) {
-                        if(res.getStatus().equals("konobarPrihvatio") || res.getStatus().equals("kuvarPrihvatio") || res.getStatus().equals("kuvarSpremio"))
+                        if(res.getStatus().equals("konobarPrihvatio") || res.getStatus().equals("kuvarPrihvatio") || res.getStatus().equals("kuvarSpremio")) {
                             temp.add(res);
+                        }
                     }
                 }
             }
