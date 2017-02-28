@@ -21,6 +21,7 @@
 
     <div class="row">
         <div class="col-md-12" style="border: 1px solid black">
+            <h1><font color="red">{{error}}</font></h1>
             <h3>Nova smena</h3>
             <br>
             <label>Radnik</label>
@@ -36,13 +37,23 @@
             <label>Datum kraja perioda smene </label><br>
             <input type="date" ng-model = "newsched.endday" class="form-control">
             <label>Vreme pocetka smene  </label><br>
-            <input type="number" ng-model = "newsched.startHours" class="form-control" min="0" max="23" required >
-            <input type="number" ng-model = "newsched.startMinutes" class="form-control" min="0" max="59" required >
-            <br>
+            <div class="row">
+                <div class="form-group col-xs-1">
+                    <input type="number" ng-model = "newsched.startHours" class="form-control" min="0" max="23" required >
+                </div>
+                <div class="form-group col-xs-1">
+                    <input type="number" ng-model = "newsched.startMinutes" class="form-control" min="0" max="59" required >
+                </div>
+            </div>
             <label>Vreme kraja smene </label><br>
-            <input type="number" ng-model = "newsched.endHours" class="form-control" min="0" max="23" required >
-            <input type="number" ng-model = "newsched.endMinutes" class="form-control" min="0" max="59" required >
-            <br>
+            <div class="row">
+                <div class="form-group col-xs-1">
+                    <input type="number" ng-model = "newsched.endHours" class="form-control" min="0" max="23" required >
+                </div>
+                <div class="form-group col-xs-1">
+                    <input type="number" ng-model = "newsched.endMinutes" class="form-control" min="0" max="59" required >
+                </div>
+            </div>
             <button type="button" class="btn btn-success" ng-click="newSchedule()">Dodaj smenu</button>
             <br>
         </div>

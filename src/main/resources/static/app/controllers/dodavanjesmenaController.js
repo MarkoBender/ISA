@@ -29,14 +29,19 @@
              });
 
         $scope.newSchedule = function(){
+            $scope.error = '';
             if($scope.newsched.employee.uloga != 'Steward')
                 $scope.newsched.restaurantRegion = null;
             $scope.newsched.restaurant = $scope.loggedUser.restaurant;
-            $http.put('/schedules/create',$scope.newsched)
-                .success(function(response){
-                    console.log('added schedule!');
-                });
-            console.log($scope);
+            if( $scope.newsched.startHours == null || $scope.newsched.endHours == null || $scope.newsched.startMinutes == null || $scope.newsched.endMinutes == null)
+                $scope.error = 'Nepodrzan format za neka polja! Izmenite'
+            else{
+                $http.put('/schedules/create',$scope.newsched)
+                    .success(function(response){
+                        console.log('added schedule!');
+                    });
+                console.log($scope);
+            }
         };
     }
 })();
