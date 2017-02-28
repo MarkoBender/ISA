@@ -29,10 +29,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="dish in menu">
-                    <td>{{dish.name}}</td>
-                    <td>{{dish.type.name}}</td>
-                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-2" ng-click="readyforupdate(dish)">Izmeni</button></td>
+                <tr ng-repeat="order in myavalibleorders">
+                    <td>{{order.foodDrinkItem.name}}</td>
+                    <td>{{order.status}}</td>
+                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-2" ng-click="">Informacije</button></td>
+                    <td><button type="button" ng-if="order.status == 'gostPorucio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Prihvati porudzbinu</button></td>
+                    <td><button type="button" ng-if="order.status == 'konobarPrihvatio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Spremaj</button></td>
+                    <td><button type="button" ng-if="order.status == 'uPripremi' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Gotovo sa spremanjem</button></td>
+                    <td><button type="button" ng-if="order.status == 'gotovo' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Dostavi</button></td>
                     <!--<th><button type="button" class="btn btn-success" ng-click="delete(dish.dish_id)">Izbrisi</button></th>-->
                 </tr>
                 </tbody>
