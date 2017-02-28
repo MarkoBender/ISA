@@ -28,6 +28,8 @@ public class Reservation {
     @ManyToMany
     private List<RestaurantTable> tables;
 
+    private String status;
+
     public Reservation(){}
 
     /*public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration) {
@@ -38,13 +40,14 @@ public class Reservation {
         this.duration = duration;
     }*/
 
-    public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration, List<RestaurantTable> tables) {
+    public Reservation(long reservation_id, Restaurant restaurant, Guest host, Date dateTime, int duration, List<RestaurantTable> tables, String status) {
         this.reservation_id = reservation_id;
         this.restaurant = restaurant;
         this.host = host;
         this.dateTime = dateTime;
         this.duration = duration;
         this.tables = tables;
+        this.status = status;
     }
 
     public long getReservation_id() {
@@ -93,5 +96,13 @@ public class Reservation {
 
     public void setTables(List<RestaurantTable> tables) {
         this.tables = tables;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

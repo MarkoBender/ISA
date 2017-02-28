@@ -1,0 +1,2 @@
+/*C10*/SET SCHEMA PUBLIC
+alter table reservation add column status varchar(255)
