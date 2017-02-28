@@ -5,8 +5,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#/WWWkonobarPregledNarudzbina">Pregled narudzbena</a></li>
-                    <li><a href="#/WWWkonobarPregledPrihvacenihNarudzbina">Pregled prihvacenih narudzbina</a></li>
-                    <li><a href="#/WWWkonobarPregledGotovihNarudzbina">Pregled gotovih narudzbina</a></li>
+                    <!--<li><a href="#/WWWkonobarPregledPrihvacenihNarudzbina">Pregled prihvacenih narudzbina</a></li>
+                    <li><a href="#/WWWkonobarPregledGotovihNarudzbina">Pregled gotovih narudzbina</a></li>-->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li  ><a href="#/WWWkonobarRasporedRada">Raspored rada</a></li>
@@ -24,6 +24,7 @@
                 <tr>
                     <th>Objekat porudzbine</th>
                     <th>Status</th>
+                    <th>Zaduzeni konobar</th>
                     <th>&nbsp;</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -32,11 +33,12 @@
                 <tr ng-repeat="order in myavalibleorders">
                     <td>{{order.foodDrinkItem.name}}</td>
                     <td>{{order.status}}</td>
+                    <td>{{order.steward.user_id}}</td>
                     <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-2" ng-click="">Informacije</button></td>
-                    <td><button type="button" ng-if="order.status == 'gostPorucio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Prihvati porudzbinu</button></td>
-                    <td><button type="button" ng-if="order.status == 'konobarPrihvatio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Spremaj</button></td>
-                    <td><button type="button" ng-if="order.status == 'uPripremi' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Gotovo sa spremanjem</button></td>
-                    <td><button type="button" ng-if="order.status == 'gotovo' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Dostavi</button></td>
+                    <td><button type="button" ng-if="order.status == 'gostPorucio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="konobarPrihvati(order)">Prihvati porudzbinu</button></td>
+                    <!--<td><button type="button" ng-if="order.status == 'konobarPrihvatio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Spremaj</button></td>
+                    <td><button type="button" ng-if="order.status == 'uPripremi' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="">Gotovo sa spremanjem</button></td>-->
+                    <td><button type="button" ng-if="order.status == 'kuvarSpremio' || order.status == 'sankerSpremio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="konobarDostavi(order)">Dostavi</button></td>
                     <!--<th><button type="button" class="btn btn-success" ng-click="delete(dish.dish_id)">Izbrisi</button></th>-->
                 </tr>
                 </tbody>

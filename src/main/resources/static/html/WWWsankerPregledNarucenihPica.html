@@ -15,4 +15,32 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <div class="row">
+        <div class="col-md-12" style="border: 1px solid black">
+            <h1>Pregled aktivnih narudzbina</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Objekat porudzbine</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in myavalibleorders">
+                    <td>{{order.foodDrinkItem.name}}</td>
+                    <td>{{order.status}}</td>
+                    <!--<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-2" ng-click="">Informacije</button></td>
+                    <td><button type="button" ng-if="order.status == 'gostPorucio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="konobarPrihvati(order)">Prihvati porudzbinu</button></td>-->
+                    <td><button type="button" ng-if="order.status == 'konobarPrihvatio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="sankerPrihvati(order)">Prihvati pice</button></td>
+                    <td><button type="button" ng-if="order.status == 'sankerPrihvatio' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="sankerSpremi(order)">Spremi pice</button></td>
+                    <!--<td><button type="button" ng-if="order.status == 'gotovo' " class="btn btn-danger" data-toggle="modal" data-target="#modal-2" ng-click="konobarDostavi(order)">Dostavi</button></td>-->
+                    <!--<th><button type="button" class="btn btn-success" ng-click="delete(dish.dish_id)">Izbrisi</button></th>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

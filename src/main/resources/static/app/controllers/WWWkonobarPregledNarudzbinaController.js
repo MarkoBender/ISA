@@ -5,8 +5,8 @@
          .module('app')
          .controller('WWWkonobarPregledNarudzbinaController', WWWkonobarPregledNarudzbinaController);
 
-     WWWkonobarPregledNarudzbinaController.$inject = ['$cookies','$http','$scope','$location'];
-     function WWWkonobarPregledNarudzbinaController($cookies,$http,$scope,$location) {
+     WWWkonobarPregledNarudzbinaController.$inject = ['$cookies','$http','$scope','$location','$window'];
+     function WWWkonobarPregledNarudzbinaController($cookies,$http,$scope,$location,$window) {
 
         /*if($cookies.get('uloga') != 'Steward')
                     $location.url('/#');*/
@@ -27,6 +27,18 @@
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
                 }
+
+        $scope.konobarPrihvati = function(order){
+            $http.put('/orderItems/konobarPrihvati/'+$scope.loggedUser.user_id,order).success(function(response){
+                $window.location.reload();
+            });
+        }
+
+        $scope.konobarDostavi = function(order){
+            $http.put('/orderItems/konobarDostavi',order).success(function(response){
+                $window.location.reload();
+            });
+        }
 
 
 
