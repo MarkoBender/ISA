@@ -19,22 +19,13 @@ public class OrderItem {
     private Date date;
 
     @ManyToOne
-    private Dish dish;
-
-    @ManyToOne
-    private Drink drink;
+    private FoodDrinkItem foodDrinkItem;
 
     @Column
-    private String statusOfDrink;
-
-    @Column
-    private String statusOfDish;
+    private String status;
 
     @ManyToOne
     private Reservation reservation;
-
-    @ManyToOne
-    private Restaurant restaurant;
 
     @ManyToOne
     private Guest guest;
@@ -45,20 +36,21 @@ public class OrderItem {
     @ManyToOne
     private Cook cook;
 
+    @ManyToOne
+    private Barman barman;
+
     public OrderItem(){}
 
-    public OrderItem(long orderItem_id, Date date, Dish dish, Drink drink, String statusOfDrink, String statusOfDish, Reservation reservation, Restaurant restaurant, Guest guest, Steward steward, Cook cook) {
+    public OrderItem(long orderItem_id, Date date, FoodDrinkItem foodDrinkItem, String status, Reservation reservation, Guest guest, Steward steward, Cook cook, Barman barman) {
         this.orderItem_id = orderItem_id;
         this.date = date;
-        this.dish = dish;
-        this.drink = drink;
-        this.statusOfDrink = statusOfDrink;
-        this.statusOfDish = statusOfDish;
+        this.foodDrinkItem = foodDrinkItem;
+        this.status = status;
         this.reservation = reservation;
-        this.restaurant = restaurant;
         this.guest = guest;
         this.steward = steward;
         this.cook = cook;
+        this.barman = barman;
     }
 
     public long getOrderItem_id() {
@@ -77,36 +69,20 @@ public class OrderItem {
         this.date = date;
     }
 
-    public Dish getDish() {
-        return dish;
+    public FoodDrinkItem getFoodDrinkItem() {
+        return foodDrinkItem;
     }
 
-    public void setDish(Dish dish) {
-        this.dish = dish;
+    public void setFoodDrinkItem(FoodDrinkItem foodDrinkItem) {
+        this.foodDrinkItem = foodDrinkItem;
     }
 
-    public Drink getDrink() {
-        return drink;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDrink(Drink drink) {
-        this.drink = drink;
-    }
-
-    public String getStatusOfDrink() {
-        return statusOfDrink;
-    }
-
-    public void setStatusOfDrink(String statusOfDrink) {
-        this.statusOfDrink = statusOfDrink;
-    }
-
-    public String getStatusOfDish() {
-        return statusOfDish;
-    }
-
-    public void setStatusOfDish(String statusOfDish) {
-        this.statusOfDish = statusOfDish;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Reservation getReservation() {
@@ -115,14 +91,6 @@ public class OrderItem {
 
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
     }
 
     public Guest getGuest() {
@@ -147,5 +115,13 @@ public class OrderItem {
 
     public void setCook(Cook cook) {
         this.cook = cook;
+    }
+
+    public Barman getBarman() {
+        return barman;
+    }
+
+    public void setBarman(Barman barman) {
+        this.barman = barman;
     }
 }
