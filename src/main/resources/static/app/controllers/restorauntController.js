@@ -109,7 +109,8 @@
                             });
         };
 
-        var dict={};
+        $scope.dict={};
+        $scope.brojStolova=Object.keys($scope.dict).length;
         var RRID=-1;
 
         $scope.selectElement = function(evt) {
@@ -131,24 +132,57 @@
 
                         var resregID=value.restaurantRegion.restaurant_region_id;
 
-                        $scope.regionID=value.restaurantRegion.restaurant_region_id;
+                        if(Object.keys($scope.dict).length==0){
+                            RRID=-1;
+                        }else{
+                            for(var key in $scope.dict){
+                                //RRID=$scope.dict[key];
+                                RRID=$scope.dict[key].restaurantRegion.restaurant_region_id;
+                                break;
+                            }
+                        }
 
-                        if(!dict[$scope.id]){
-                            $scope.selectedElement.style.fill = 'green';
-                            dict[$scope.id] = RRID;
+                        //$scope.regionID=value.restaurantRegion.restaurant_region_id;
+
+                        if(!$scope.dict[$scope.id]){
+                            if(RRID==-1 || RRID==resregID){
+                                $scope.selectedElement.style.fill = 'green';
+                                //$scope.dict[$scope.id] = resregID;
+                                $scope.dict[$scope.id] = value;
+                            }else
+                                alert("NEMOZE DRUGI REGION");
                         }
                         else{
                             $scope.selectedElement.style.fill = 'red';
-                            delete dict[$scope.id];
+                            delete $scope.dict[$scope.id];
                         }
 
+                        if(Object.keys($scope.dict).length==0){
+                            RRID=-1;
+                        }else{
+                            for(var key in $scope.dict){
+                                //RRID=$scope.dict[key];
+                                RRID=$scope.dict[key].restaurantRegion.restaurant_region_id;
+                                break;
+                            }
+                        }
+
+                        $scope.brojStolova=Object.keys($scope.dict).length;
+
+                        console.log(RRID);
+
                         console.log($scope.id);
-                        console.log(dict);
+                        console.log($scope.dict);
                     }
                 }
             });
+        }
 
-
+        $scope.odabraniStolovi = new Array();
+        $scope.ucitajStolove= function(){
+            for(var key in $scope.dict)
+                $scope.odabraniStolovi.push($scope.dict[key]);
+            console.log($scope.odabraniStolovi);
         }
 
 
@@ -176,7 +210,8 @@
                     restaurant : $scope.restoran,
                     host : $scope.host,
                     dateTime : $scope.datum,
-                    duration : $scope.trajanje
+                    duration : $scope.trajanje,
+                    tables : $scope.odabraniStolovi
                 };
                 console.log(pozvaniPrijatelji);
                 console.log("POKUSAVAM DA POSTOVO SAM!");
