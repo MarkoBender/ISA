@@ -8,10 +8,10 @@
 
     App.config(['$routeProvider', function ($routeProvider) {
 
-        $routeProvider.when('/cars', {
-            templateUrl: 'brt.html'
-
-        });
+        $routeProvider.when('/conf/:id',{
+            templateUrl:'html/confirmation.html',
+            controller: 'ConfirmationController'
+        })
 
         $routeProvider.when('/restorani', {
             templateUrl: 'html/restorani.html',
