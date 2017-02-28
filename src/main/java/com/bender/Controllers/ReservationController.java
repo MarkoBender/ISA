@@ -1,6 +1,7 @@
 package com.bender.Controllers;
 
 import com.bender.Beans.Guest;
+import com.bender.Beans.Invitation;
 import com.bender.Beans.Reservation;
 import com.bender.Repositories.GuestRepository;
 import com.bender.Repositories.ReservationRepository;
@@ -37,13 +38,31 @@ public class ReservationController {
     @RequestMapping(value = "/allActive/{id}")
     List<Reservation> getAllActive(@PathVariable long id){
         Guest host = guestRepository.findOne(id);
-        return repository.findByHostAndDateTimeAfter(host,new Date());
+        List<Reservation> reservations = repository.findByHost(host);
+        ArrayList<Reservation> active = new ArrayList<>();
+        for(Reservation res : reservations){
+            Date resDate = res.getDateTime();
+            resDate.setHours(resDate.getHours() + res.getDuration());
+            if(resDate.after(new Date()))
+                active.add(res);
+
+        }
+        return active;
     }
 
     @RequestMapping(value = "/allInactive/{id}")
     List<Reservation> getAllInactive(@PathVariable long id){
         Guest host = guestRepository.findOne(id);
-        return repository.findByHostAndDateTimeBefore(host,new Date());
+        List<Reservation> reservations = repository.findByHost(host);
+        ArrayList<Reservation> inactive = new ArrayList<>();
+        for(Reservation res : reservations){
+            Date resDate = res.getDateTime();
+            resDate.setHours(resDate.getHours() + res.getDuration());
+            if(resDate.before(new Date()))
+                inactive.add(res);
+
+        }
+        return inactive;
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.PUT)
