@@ -25,11 +25,12 @@ public class OrderItemController {
     private EmployeeRepository employeeRepository;
     private BarmanRepository barmanRepository;
     private CookRepository cookRepository;
+    private ReservationRepository reservationRepository;
 
     @Autowired
     public OrderItemController (OrderItemRepository repository, RestaurantRegionRepository rrrepository, DishRepository dishRepository,
                                 DrinkRepository drinkRepository, StewardRepository stewardRepository, DailyScheduleRepository dailyScheduleRepository,
-                                EmployeeRepository employeeRepository, BarmanRepository barmanRepository, CookRepository cookRepository){
+                                EmployeeRepository employeeRepository, BarmanRepository barmanRepository, CookRepository cookRepository, ReservationRepository reservationRepository){
         this.repository=repository;
         this.employeeRepository=employeeRepository;
         this.stewardRepository=stewardRepository;
@@ -39,6 +40,7 @@ public class OrderItemController {
         this.rrrepository=rrrepository;
         this.dishRepository=dishRepository;
         this.drinkRepository=drinkRepository;
+        this.reservationRepository=reservationRepository;
     }
 
     @RequestMapping(value = "/all" , method = RequestMethod.GET)
@@ -300,6 +302,39 @@ public class OrderItemController {
         repository.save(updatedOI);
     }
 
+    @RequestMapping(value="/findByResIdAndGuest/{resID}", method=RequestMethod.POST)
+    public List<OrderItem> findBRIAG(@RequestBody Guest guest, @PathVariable long resID){
+        List<OrderItem> sve=repository.findAll();
+        Reservation res=reservationRepository.findOne(resID);
+
+        List<OrderItem> temp=new ArrayList<>();
+        for(OrderItem oi: sve){
+            if(oi.getReservation().getReservation_id()==resID) {
+                if (oi.getGuest().getUser_id()==guest.getUser_id()) {
+                    System.out.println("DOBAVIO SAM JEDNU");
+                    temp.add(oi);
+                }
+
+            }
+        }
+
+        return temp;
+    }
+
+    @RequestMapping(value="/getByReservation", method=RequestMethod.POST)
+    public boolean getBR(@RequestBody Reservation reservation){
+        List<OrderItem> sve=repository.findAll();
+
+        List<OrderItem> temp=new ArrayList<>();
+        for(OrderItem oi: sve){
+            if(oi.getReservation().getReservation_id()==reservation.getReservation_id()) {
+                if(!oi.getStatus().equals("dostavljeno"))
+                    return false;
+            }
+        }
+
+        return true;
+    }
 
 
 }
