@@ -55,13 +55,19 @@ public class OrderItemController {
             }
         }
 
+        System.out.println("DUZINA TEMPOIS JE "+tempOIS.size());
+
         List<OrderItem> temp=new ArrayList<>();
         for(OrderItem res : tempOIS){
+            System.out.println("USAO U PETLJU");
             Reservation reservation=res.getReservation();
             RestaurantRegion RR=reservation.getTables().get(0).getRestaurantRegion();
             if(RR.equals(rrrepository.findOne(regionID))) {
-                Date resDate = reservation.getDateTime();
+                System.out.println("ISTA JE ZONA SA IMENOM "+RR.getName());
+                Date datum = reservation.getDateTime();
+                Date resDate=new Date(datum.getTime());
                 resDate.setHours(resDate.getHours() + reservation.getDuration());
+                System.out.println("datum kraja je "+resDate+" a datum pocetka je "+reservation.getDateTime());
                 if (resDate.after(new Date()) && reservation.getDateTime().before(new Date())) {
                     temp.add(res);
                 }
