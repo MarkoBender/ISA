@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by User on 2/25/2017.
  */
-//@Entity
+@Entity
 public class OrderItem {
 
     @Id

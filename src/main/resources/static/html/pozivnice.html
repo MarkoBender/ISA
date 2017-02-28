@@ -36,7 +36,7 @@
                     <td>{{inv.reservation.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{inv.reservation.duration + " sata"}}</td>
                     <td>{{inv.reservation.host.name}}</td>
-                    <td><button class="btn btn-danger" data-toggle="modal" data-target="#modal-narucivanje" ng-click="zapocni_narucivanje(inv.reservation.restaurant)">Naruci</button></td>
+                    <td><button class="btn btn-danger" data-toggle="modal" data-target="#modal-narucivanje" ng-click="zapocni_narucivanje(inv.reservation)">Naruci</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -77,9 +77,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Rezervacija - korak 2</h3>
+                    <h3>Izaberite tip narudzbine</h3>
+                    <br>
+                    <select ng-model="tip">
+                        <option value=""></option>
+                        <option value="jelo">jelo</option>
+                        <option value="pice">pice</option>
+                    </select>
+                    <br>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" ng-show="tip == 'jelo'">
                     <table class="table" >
                         <thead>
                         <tr>
@@ -97,6 +104,29 @@
                             <td>{{jelo.dish_type.name}}</td>
                             <td>{{jelo.price}}</td>
                             <td><button type="button" class="btn btn-primary" ng-click="naruci(jelo)" data-dismiss="modal">Naruci</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-body" ng-show="tip == 'pice'">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Opis</th>
+                            <th>Tip</th>
+                            <th>Cena</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="pice in kartaPica">
+                            <td>{{pice.name}}</td>
+                            <td>{{pice.description}}</td>
+                            <td>{{pice.type.name}}</td>
+                            <td>{{pice.price}}</td>
+                            <td><button type="button" class="btn btn-primary" ng-click="naruci(pice)" data-dismiss="modal">Naruci</button></td>
                         </tr>
                         </tbody>
                     </table>

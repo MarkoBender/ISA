@@ -55,6 +55,8 @@ public class GuestController {
         }
     }
 
+
+
     @RequestMapping(value = "/friends/{id}")
     public List<Guest> getAllFriends(@PathVariable long id){
         Guest guest = repository.findOne(id);
@@ -92,7 +94,11 @@ public class GuestController {
     }
 
 
-
+    @RequestMapping(value = "/findOne/{id}")
+    public Guest getOne(@PathVariable long id) {
+        Guest guest = repository.findOne(id);
+        return guest;
+    }
 
 
 
