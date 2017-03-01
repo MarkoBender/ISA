@@ -8,6 +8,11 @@
     RestorauntsController.$inject = ['$cookies','$http','$scope'];
     function RestorauntsController($cookies,$http,$scope) {
 
+        $http.get('/guests/findOne/'+$cookies.get('id'))
+                                        .success(function(response){
+                                            $scope.loggedUser = response;
+                                            });
+
         $http.get('http://ip-api.com/json')
             .success(function(coordinates) {
                 $scope.mylat = coordinates.lat;
@@ -80,6 +85,32 @@
         }
 
         $scope.getFriends();
+
+        $scope.zapocniOcenjivanje = function(reservation){
+            $scope.ocena={};
+            console.log(reservation);
+            $scope.reservation=reservation;
+            $http.post('/ocene/findByGuestAndReservation/'+$scope.reservation.reservation_id,$scope.loggedUser).success(function(response){
+                if(response.ocena_id==-1){
+                    $scope.ocena={};
+                    $scope.ocena.ocenaRestorana=0;
+                    $scope.ocena.ocenaUsluge=0;
+                    $scope.ocena.guest=$scope.loggedUser;
+                    $scope.ocena.reservation=$scope.reservation;
+                }else{
+                    $scope.ocena=response;
+                }
+
+            });
+
+        }
+
+        $scope.zavrsiOcenjivanje = function(){
+            $http.put('/ocene/create',$scope.ocena).success(function(response){
+                console.log("dodavanje odradio");
+            });
+            //console.log($scope.ocena);
+        }
 
         $scope.logout = function (){
              $cookies.put('name', null);

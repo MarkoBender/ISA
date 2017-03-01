@@ -63,7 +63,7 @@
                     <td>{{res.restaurant.name}}</td>
                     <td>{{res.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>4.7</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-4">Oceni</button></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-4" ng-click="zapocniOcenjivanje(res)">Oceni</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -307,56 +307,27 @@
                             <tbody>
                             <tr>
                                 <td>Naziv:</td>
-                                <td>Moj Naziv</td>
+                                <td>{{reservation.restaurant.name}}</td>
                             </tr>
                             <tr>
                                 <td>Datum:</td>
-                                <td>12.12.2016.</td>
+                                <td>{{reservation.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                             </tr>
                             <tr>
                                 <td>Trajanje:</td>
-                                <td>2 sata</td>
+                                <td>{{reservation.duration}}</td>
                             </tr>
                             <tr>
                                 <td>Ocena restorana:</td>
+
                                 <td>
-                                    <div class="rating">
-                                        <select ng-model="ocenaRestorana">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
+                                    <input type="number" ng-model="ocena.ocenaRestorana" min="0" max="5" maxlength = "1" />
                                 </td>
                             </tr>
                             <tr>
-                                <td>Ocena konobara:</td>
+                                <td>Ocena usluge:</td>
                                 <td>
-                                    <div class="rating">
-                                        <select ng-model="ocenaKonobara">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ocena jela:</td>
-                                <td>
-                                    <div class="rating">
-                                        <select ng-model="ocenaJela">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
+                                    <input type="number" ng-model="ocena.ocenaUsluge" min="0" max="5" maxlength = "1"  />
                                 </td>
                             </tr>
                             </tbody>
@@ -365,7 +336,8 @@
 
                     <div class="modal-footer">
                         <a href="" class="btn btn-default" data-dismiss="modal">Odustani</a>
-                        <button type="button" data-dismiss="modal" class="btn btn-primary" data-toggle="modal">Oceni</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-primary" data-toggle="modal" ng-click="zavrsiOcenjivanje()"
+                                ng-disabled="ocena.ocenaUsluge<0.0 || ocena.ocenaUsluge>5.0 || ocena.ocenaRestorana<0.0 || ocena.ocenaRestorana>5.0">Oceni</button>
                     </div>
                 </div>
             </div>
