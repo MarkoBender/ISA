@@ -1,5 +1,7 @@
 package com.bender.Beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -20,9 +22,11 @@ public class RestaurantTable {
 
     private double height;
 
+    //@JsonIgnore
     @ManyToOne
     private RestaurantRegion restaurantRegion;
 
+    @JsonIgnore
     @ManyToOne
     private Restaurant restaurant;
 

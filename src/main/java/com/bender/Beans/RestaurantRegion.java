@@ -1,5 +1,7 @@
 package com.bender.Beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -24,6 +26,7 @@ public class RestaurantRegion {
 
     private String color;
 
+    @JsonIgnore
     @ManyToOne
     private Restaurant restaurant;
 

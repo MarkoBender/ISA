@@ -135,6 +135,10 @@
             $scope.trajanje = null;
             $scope.datum = null;
             $scope.broj_stola = null;
+            $scope.dict={};
+            $scope.brojStolova=0;
+            //$scope.brojStolova=Object.keys($scope.dict).length;
+            //$scope.odabraniStolovi=null;
 
             $scope.selectedElement = 0;
 
@@ -151,6 +155,19 @@
                                                 });
                             });
         };
+
+
+        $scope.predjiNaRezervisanjeStolova = function(){
+            alert($scope.datum);
+            alert($scope.restoran.name);
+
+            $http.post("/restaurants/dobaviRezervisaneStoloveZaVreme/"+$scope.restoran.restaurant_id+"/"+$scope.datum.getTime()).success(function(response){
+                $scope.rezSto=response;
+                console.log(response);
+                console.log("USPESNO PROSAO");
+            });
+
+        }
 
         $scope.dict={};
         $scope.brojStolova=Object.keys($scope.dict).length;
@@ -173,6 +190,8 @@
                         $scope.X = value.xvalue;
                         $scope.Y = value.yvalue;
 
+                        $scope.brojStolova=Object.keys($scope.dict).length;
+
                         var resregID=value.restaurantRegion.restaurant_region_id;
 
                         if(Object.keys($scope.dict).length==0){
@@ -189,11 +208,29 @@
 
                         if(!$scope.dict[$scope.id]){
                             if(RRID==-1 || RRID==resregID){
+                                $http.post("/restaurants/mozeLiSe/"+$scope.restoran.restaurant_id+"/"+$scope.datum.getTime()+"/"+$scope.id).success(function(response){
+                                    if(response==true){
+                                        $scope.selectedElement.style.fill = 'green';
+                                                //$scope.dict[$scope.id] = resregID;
+                                                $scope.dict[$scope.id] = value;
+
+                                    }
+                                    else{
+                                        alert("sto vec zauzet");
+                                        $scope.selectedElement.style.fill='blue';
+                                        //$scope.selectedElement.
+                                        delete $scope.dict[$scope.id];
+                                    }
+                                });
+                            }else
+                                alert("NEMOZE DRUGI REGION");
+
+                            /*if(RRID==-1 || RRID==resregID){
                                 $scope.selectedElement.style.fill = 'green';
                                 //$scope.dict[$scope.id] = resregID;
                                 $scope.dict[$scope.id] = value;
                             }else
-                                alert("NEMOZE DRUGI REGION");
+                                alert("NEMOZE DRUGI REGION");*/
                         }
                         else{
                             $scope.selectedElement.style.fill = 'red';
