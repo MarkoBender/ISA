@@ -1,7 +1,9 @@
-package com.bender.Models;
+package com.bender.Controllers;
 
 import com.bender.Beans.Guest;
+import com.bender.Beans.Ocena;
 import com.bender.Beans.Reservation;
+import com.bender.Repositories.OcenaRepository;
 import com.bender.Repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

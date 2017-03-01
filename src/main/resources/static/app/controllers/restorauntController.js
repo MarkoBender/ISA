@@ -5,6 +5,8 @@
         .module('app')
         .controller('RestorauntsController', RestorauntsController);
 
+
+
     RestorauntsController.$inject = ['$cookies','$http','$scope'];
     function RestorauntsController($cookies,$http,$scope) {
 
@@ -102,8 +104,18 @@
                 }
 
             });
-
         }
+
+        /*oR.oninput = function () {
+            if (this.value.length > 1) {
+                this.value = this.value.slice(0,1);
+            }
+        }
+        oU.oninput = function () {
+            if (this.value.length > 1) {
+                this.value = this.value.slice(0,1);
+            }
+        }*/
 
         $scope.zavrsiOcenjivanje = function(){
             $http.put('/ocene/create',$scope.ocena).success(function(response){
