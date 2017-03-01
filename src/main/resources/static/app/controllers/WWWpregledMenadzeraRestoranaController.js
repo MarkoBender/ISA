@@ -5,16 +5,22 @@
         .module('app')
         .controller('WWWpregledMenadzeraRestoranaController', WWWpregledMenadzeraRestoranaController);
 
-    WWWpregledMenadzeraRestoranaController.$inject = ['$cookies','$http','$scope','$location'];
-    function WWWpregledMenadzeraRestoranaController($cookies,$http,$scope,$location) {
+    WWWpregledMenadzeraRestoranaController.$inject = ['$cookies','$http','$scope','$location','$window'];
+    function WWWpregledMenadzeraRestoranaController($cookies,$http,$scope,$location,$window) {
 
         if($cookies.get('uloga') != 'SystemManager')
-                    $location.url('/#');
+                    $location.url('/');
+
+        $http.get('/systemManagers/findOne/'+$cookies.get('id'))
+                    .success(function(response){
+                        $scope.loggedUser = response;
+                        });
 
         $scope.logout = function (){
                      $cookies.put('name', null);
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
+                     $location.url('/');
                 }
 
         $http.get('/restaurantManagers/all').success(function(response){
@@ -32,23 +38,18 @@
         }
 
         $scope.zavrsiKreiranjeMenadzeraRestorana = function(){
-            console.log("usao");
-
             $http.post('/users/existsEmail',$scope.restaurantManager.email)
                 .success(function (response){
                     if(response == false){
                         $http.put('/restaurantManagers/create', $scope.restaurantManager)
                             .success(function(response){
                                 console.log("Poslao sam nest!");
+                                $window.location.reload();
                             });
                     }
                     else
                         alert("Email zauzet! Stavite drugi");
                 });
-
-            /*$http.put('/restaurantManagers/create', $scope.restaurantManager).success(function(response){
-                console.log("Poslao sam nest!");
-            });*/
         };
 
          $scope.zapocniIzmenuMenadzeraRestorana = function(id){
@@ -67,9 +68,25 @@
         };
 
         $scope.zavrsiIzmenuMenadzeraRestorana = function(){
-            $http.put('/restaurantManagers/update', $scope.restaurantManager).success(function(response){
+            $http.post('/users/existsEmail',$scope.restaurantManager.email)
+                            .success(function (response){
+                                if(response == false){
+                                $http.put('/restaurantManagers/update', $scope.restaurantManager).success(function(response){
+                                                console.log("Poslao sam nest!");
+                                                $window.location.reload();
+                                            });
+                                    /*$http.put('/restaurantManagers/create', $scope.restaurantManager)
+                                        .success(function(response){
+                                            console.log("Poslao sam nest!");
+                                            $window.location.reload();
+                                        });*/
+                                }
+                                else
+                                    alert("Email zauzet! Stavite drugi");
+                            });
+            /*$http.put('/restaurantManagers/update', $scope.restaurantManager).success(function(response){
                 console.log("Poslao sam nest!");
-            });
+            });*/
         };
 
     }

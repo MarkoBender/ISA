@@ -6,7 +6,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#/WWWpregledRestorana">Pregled restorana <span class="sr-only">(current)</span></a></li>
                     <li class="active"><a href="#/WWWpregledMenadzeraRestorana">Pregled menadzera <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#/WWWpregledMenadzeraSistema">Pregled menadzera sistema <span class="sr-only">(current)</span></a></li>
+                    <li ng-show="loggedUser.name=='Admin'"><a href="#/WWWpregledMenadzeraSistema">Pregled menadzera sistema <span class="sr-only">(current)</span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <!--<li ><a href="#/nalog">Moj nalog</a></li>-->

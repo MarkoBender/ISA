@@ -217,6 +217,6 @@
                     controller: 'inforadController'
         });
 
-        $routeProvider.otherwise({});
+        $routeProvider.otherwise({redirectTo:'/'});
     }]);
 })();

@@ -5,16 +5,22 @@
         .module('app')
         .controller('WWWpregledRestoranaController', WWWpregledRestoranaController);
 
-    WWWpregledRestoranaController.$inject = ['$cookies','$http','$scope','$location'];
-    function WWWpregledRestoranaController($cookies,$http,$scope,$location) {
+    WWWpregledRestoranaController.$inject = ['$cookies','$http','$scope','$location','$window'];
+    function WWWpregledRestoranaController($cookies,$http,$scope,$location,$window) {
 
         if($cookies.get('uloga') != 'SystemManager')
-                    $location.url('/#');
+                    $location.url('/');
+
+        $http.get('/systemManagers/findOne/'+$cookies.get('id'))
+                                        .success(function(response){
+                                            $scope.loggedUser = response;
+                                            });
 
         $scope.logout = function (){
                      $cookies.put('name', null);
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
+                     $location.url('/');
                 }
 
 
@@ -36,6 +42,7 @@
                     console.log("usao");
                     $http.put('/restaurants/create', $scope.restoran).success(function(response){
                         console.log("Poslao sam nest!");
+                        $window.location.reload();
                     });
                 };
 
@@ -54,6 +61,7 @@
                     console.log("usao");
                     $http.put('/restaurants/update/'+$scope.restoran.restaurant_id, $scope.restoran).success(function(response){
                         console.log("Poslao sam nest!");
+                        $window.location.reload();
                     });
                 };
 

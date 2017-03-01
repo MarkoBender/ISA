@@ -5,16 +5,22 @@
         .module('app')
         .controller('WWWpregledMenadzeraSistemaController', WWWpregledMenadzeraSistemaController);
 
-    WWWpregledMenadzeraSistemaController.$inject = ['$cookies','$http','$scope','$location'];
-    function WWWpregledMenadzeraSistemaController($cookies,$http,$scope, $location) {
+    WWWpregledMenadzeraSistemaController.$inject = ['$cookies','$http','$scope','$location','$window'];
+    function WWWpregledMenadzeraSistemaController($cookies,$http,$scope, $location,$window) {
 
         if($cookies.get('uloga') != 'SystemManager')
-                    $location.url('/#');
+                    $location.url('/');
+
+        $http.get('/systemManagers/findOne/'+$cookies.get('id'))
+                                        .success(function(response){
+                                            $scope.loggedUser = response;
+                                            });
 
         $scope.logout = function (){
                      $cookies.put('name', null);
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
+                     $location.url('/');
                 }
 
         $http.get('/systemManagers/all').success(function(response){
@@ -36,15 +42,12 @@
                         $http.put('/systemManagers/create', $scope.systemManager)
                             .success(function(response){
                                 console.log("Poslao sam nest!");
+                                $window.location.reload();
                             });
                     }
                     else
                         alert("Email zauzet! Stavite drugi");
                 });
-
-            /*$http.put('/restaurantManagers/create', $scope.restaurantManager).success(function(response){
-                console.log("Poslao sam nest!");
-            });*/
         };
 
          $scope.zapocniIzmenuMenadzeraSistema = function(id){
@@ -56,9 +59,18 @@
         };
 
         $scope.zavrsiIzmenuMenadzeraSistema = function(){
-            $http.put('/systemManagers/update', $scope.systemManager).success(function(response){
-                console.log("Poslao sam nest!");
-            });
+            $http.post('/users/existsEmail',$scope.systemManager.email)
+                            .success(function (response){
+                                if(response == false){
+                                    $http.put('/systemManagers/update', $scope.systemManager).success(function(response){
+                                                    console.log("Poslao sam nest!");
+                                                    $window.location.reload();
+                                                });
+                                }
+                                else
+                                    alert("Email zauzet! Stavite drugi");
+                            });
+
         };
 
     }
