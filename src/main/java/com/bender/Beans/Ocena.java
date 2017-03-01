@@ -15,6 +15,7 @@ public class Ocena {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long ocena_id;
 
+
     @ManyToOne
     private Reservation reservation;
 

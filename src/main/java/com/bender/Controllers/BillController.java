@@ -148,4 +148,25 @@ public class BillController {
 
         return temp;
     }
+
+    @RequestMapping(value="/cashForRestaurant/{from}/{until}", method=RequestMethod.POST)
+    public double getCash(@PathVariable long from,@PathVariable long until,@RequestBody Restaurant restaurant){
+        double cash =0;
+        for(Bill bill : repository.findAll()){
+            if(bill.getReservation().getRestaurant().getRestaurant_id() == restaurant.getRestaurant_id())
+                if(bill.getDate().getTime() > from && bill.getDate().getTime() < until)
+                    cash += bill.getPrice();
+        }
+        return cash;
+    }
+
+    @RequestMapping(value="/cashForSteward", method=RequestMethod.POST)
+    public double getCashforSteward(@RequestBody Steward steward){
+        double cash =0;
+        for(Bill bill : repository.findAll()){
+            if(bill.getSteward().getUser_id() == steward.getUser_id() )
+                    cash += bill.getPrice();
+        }
+        return cash;
+    }
 }

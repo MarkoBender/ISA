@@ -31,6 +31,10 @@
                         .success(function(response){
                              $scope.buyingorders = response;
                         });
+                    $http.post('/ocene/gradeforRestaurant',$scope.loggedUser.restaurant)
+                        .success(function(response){
+                            $scope.restaurantGrade = response;
+                        });
                 });
 
             $scope.logout = function (){
@@ -71,5 +75,64 @@
                     })(i);
                 }
             };
+
+            $scope.productGrade = function (){
+                var flag=false;
+                $http.post('/foodndrinks/itemFromName/'+$scope.productName,$scope.loggedUser.restaurant)
+                    .success(function(response){
+                        $scope.menuitem = response;
+                        for(var prop in $scope.menuitem) {
+                                if($scope.menuitem.hasOwnProperty(prop))
+                                    flag=true;
+                            }
+                            if(flag){
+                                $scope.error="";
+                                $http.post('/ocene/gradeForProduct',$scope.menuitem)
+                                    .success(function(response){
+                                       $scope.averageProductGrade = response;
+                                    });
+                            }
+                            else
+                                $scope.error = "Jelo ili pice ne postoji na meniju restorana!";
+                    });
+            };
+
+            $scope.konobarGrade = function(){
+                var flag=false;
+                $http.post('/stewards/getfromName/'+$scope.konobarName+'/'+$scope.konobarSurname,$scope.loggedUser.restaurant)
+                    .success(function(response){
+                        $scope.steward = response;
+                        console.log($scope);
+                        for(var prop in $scope.steward) {
+                            if($scope.steward.hasOwnProperty(prop))
+                                flag=true;
+                        }
+                        if(flag){
+                            $scope.errorSteward="";
+                            $http.post('/ocene/gradeForSteward',$scope.steward)
+                                .success(function(response){
+                                    $scope.averageStewardGrade = response;
+                                    console.log($scope);
+                                });
+                            $http.post('/bills/cashForSteward',$scope.steward)
+                                .success(function(response){
+                                    $scope.cashMoneySteward = response;
+                                });
+                        }
+                        else{
+                            $scope.errorSteward="Konobar ne postoji!";
+                        }
+                    });
+            };
+
+            $scope.cash = function (){
+                if($scope.cashFrom != null && $scope.cashTo != null){
+                    $http.post('/bills/cashForRestaurant/'+$scope.cashFrom.getTime()+'/'+$scope.cashTo.getTime(),$scope.loggedUser.restaurant)
+                        .success(function(response){
+                            $scope.cashMoney = response;
+                        });
+                }
+            };
+
          }
 })();

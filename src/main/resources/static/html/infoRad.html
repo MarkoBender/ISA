@@ -19,9 +19,48 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
     <div>
-        <svg width="1000" height="1000" id="svgcontainer">
+        <select ng-model="infotype">
+            <option value=""></option>
+            <option value="week">Nedeljni prikaz posete</option>
+            <option value="product">Ocena proizvoda</option>
+            <option value="konobar">Konobar</option>
+            <option value="restoran">Restoran</option>
+        </select>
+    </div>
+    <br>
+    <div ng-show="infotype == 'restoran'" class="form-group col-xs-3">
+        <h4>Ocena: {{restaurantGrade}}</h4>
+        <label>Prihodi od:</label>
+        <input type="date" ng-model = "cashFrom" class="form-control">
+        <label>Prihodi do:</label>
+        <input type="date" ng-model = "cashTo" class="form-control">
+        <button type="button" class="btn btn-warning" ng-click="cash()">Prikazi prihode</button>
+        <h4>Prihodi za trazeni period : {{cashMoney}}</h4>
+    </div>
+    <div ng-show="infotype == 'week'" class="form-group col-xs-3">
+        <input type="date" ng-model = "dateStart" class="form-control">
+        <button type="button" class="btn btn-warning" ng-click="click()">Prikazi</button>
+    </div>
+    <div ng-show="infotype == 'product'">
+        <h3><font color="red">{{error}}</font></h3>
+        <h4>Ime proizvoda</h4>
+        <input type="text" ng-model = "productName" class="form-control">
+        <button type="button" class="btn btn-warning" ng-click="productGrade()">Search</button>
+        <h4>Ocena: {{averageProductGrade}}</h4>
+    </div>
+    <div ng-show="infotype == 'konobar'">
+        <h3><font color="red">{{errorSteward}}</font></h3>
+        <h4>Ime konobara</h4>
+        <input type="text" ng-model = "konobarName" class="form-control">
+        <h4>Prezime konobara</h4>
+        <input type="text" ng-model = "konobarSurname" class="form-control">
+        <button type="button" class="btn btn-warning" ng-click="konobarGrade()">Search</button>
+        <h4>Ocena: {{averageStewardGrade}}</h4>
+        <h4>Prihod konobara {{cashMoneySteward}}</h4>
+    </div>
+    <div ng-show="infotype == 'week' ">
+        <svg width="1000" height="500" id="svgcontainer">
             <title id="title">A line chart showing some information</title>
             <g class="grid y-grid" id="xGrid">
                 <line x1="100" x2="100" y1="10" y2="411" style="stroke:rgb(0,0,0);stroke-width:1"></line>
@@ -60,9 +99,6 @@
             <circle cx="600" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
             <circle cx="700" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
             <circle cx="800" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-
         </svg>
-        <input type="date" ng-model = "dateStart" class="form-control">
-        <button type="button" class="btn btn-success" ng-click="click()">Click</button>
     </div>
 </div>
