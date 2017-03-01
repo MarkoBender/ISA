@@ -3,6 +3,7 @@ package com.bender.Controllers;
 import com.bender.Beans.Guest;
 import com.bender.Beans.Invitation;
 import com.bender.Beans.Reservation;
+import com.bender.Beans.RestaurantTable;
 import com.bender.Repositories.GuestRepository;
 import com.bender.Repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,9 @@ public class ReservationController {
         List<Reservation> reservations = repository.findByHost(host);
         ArrayList<Reservation> active = new ArrayList<>();
         for(Reservation res : reservations){
-            Date resDate = res.getDateTime();
+            //Date resDate = res.getDateTime();
+            Date datum = res.getDateTime();
+            Date resDate=new Date(datum.getTime());
             resDate.setHours(resDate.getHours() + res.getDuration());
             if(resDate.after(new Date()))
                 active.add(res);
@@ -56,7 +59,9 @@ public class ReservationController {
         List<Reservation> reservations = repository.findByHost(host);
         ArrayList<Reservation> inactive = new ArrayList<>();
         for(Reservation res : reservations){
-            Date resDate = res.getDateTime();
+            //Date resDate = res.getDateTime();
+            Date datum = res.getDateTime();
+            Date resDate=new Date(datum.getTime());
             resDate.setHours(resDate.getHours() + res.getDuration());
             if(resDate.before(new Date()))
                 inactive.add(res);
@@ -71,6 +76,14 @@ public class ReservationController {
         return reservation;
     }
 
+    @RequestMapping(value="/setInactive", method=RequestMethod.PUT)
+    public Reservation setIA(@RequestBody Reservation reservation){
+        //reservation.setStatus("closed");
+        reservation.setStatus("zatrazen");
+        //reservation.setTables(new ArrayList<RestaurantTable>());
+        repository.save(reservation);
 
+        return reservation;
+    }
 
 }

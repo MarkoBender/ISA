@@ -57,6 +57,10 @@
 
         $scope.zapocni_narucivanje = function(reservation){
             $scope.trenutnaRezervacija=reservation;
+
+            $http.post('/orderItems/findByResIdAndGuest/'+reservation.reservation_id,$scope.loggedUser).success(function(response){
+                            $scope.myavalibleorders=response;
+                        });
             $http.get('/dishes/menu/' + reservation.restaurant.restaurant_id).success(function(response){
                 console.log("Dobijo sam jelovnik!");
                 $scope.jelovnik = response;

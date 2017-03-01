@@ -20,6 +20,10 @@
                                             $scope.myavalibleorders = response;
                                             console.log($scope);
                                         });
+                                    $http.get('/bills/all').success(function(response){
+                                        $scope.bills=response;
+                                    });
+
                                 });
 
         $scope.logout = function (){
@@ -38,6 +42,22 @@
             $http.put('/orderItems/konobarDostavi',order).success(function(response){
                 $window.location.reload();
             });
+        }
+
+        $scope.pregledRezervisanihStolova=function(order){
+            alert("PREGLED");
+            $http.post('/restaurantregions/forRestaurant',$scope.loggedUser.restaurant)
+                            .success(function(response){
+                                $scope.regions = response;
+                                console.log($scope);
+                                $http.post('/restauranttables/forRestaurant',$scope.loggedUser.restaurant)
+                                                .success(function(response){
+                                                    $scope.tables = response;
+                                                    console.log($scope);
+                                                    $scope.reservedTables=order.reservation.tables;
+                                                    //$scope.restaurantRegion=region;
+                                                });
+                            });
         }
 
 

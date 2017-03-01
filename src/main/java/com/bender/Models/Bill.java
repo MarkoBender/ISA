@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by User on 2/25/2017.
  */
-//@Entity
+@Entity
 public class Bill {
 
     @Id

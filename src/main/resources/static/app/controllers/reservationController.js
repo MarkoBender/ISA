@@ -5,8 +5,8 @@
         .module('app')
         .controller('ReservationController', ReservationController);
 
-    ReservationController.$inject = ['$cookies','$http','$scope'];
-    function ReservationController($cookies,$http,$scope) {
+    ReservationController.$inject = ['$cookies','$http','$scope','$window'];
+    function ReservationController($cookies,$http,$scope,$window) {
 
         $http.get('/guests/findOne/'+$cookies.get('id'))
             .success(function(response){
@@ -45,7 +45,10 @@ console.log($scope.reservationsWithInvitations);
             console.log(datum.getTime());
             console.log($scope.trenutnaRezervacija.dateTime);
             if(datum.getTime()<$scope.trenutnaRezervacija.dateTime)
-                datum=$scope.trenutnaRezervacija.dateTime;
+                datum=new Date($scope.trenutnaRezervacija.dateTime);
+
+            alert(datum.getHours());
+            alert(datum.getMinutes());
 
             var rezervacija = {
                                 date : datum,
@@ -67,19 +70,42 @@ console.log($scope.reservationsWithInvitations);
 
         $scope.zatraziRacun = function(reservation){
 
-            $http.post('/orderItems/getByReservation',reservation).success(function(response){
-                if(response==true){
+            //alert(reservation.dateTime);
+            //alert(reservation.duration);
+            var datum=new Date(reservation.dateTime);
+            alert(datum.getHours());
+            alert(datum.getMinutes());
+
+            datum.setHours(datum.getHours()+reservation.duration);
+            alert(datum.getHours());
+            alert(datum.getMinutes());
+            //alert(datum.getTime());
+
+            var trenutniDatum=new Date();
+            if(trenutniDatum.getTime()<=datum.getTime() && trenutniDatum.getTime()>=reservation.dateTime){
+                alert("MOZES PLATITI");
+
+                $http.put('/bills/zahtevZaRacun',reservation).success(function(response){
+                    alert("USPESNO!");
+                    $window.location.reload();
+                });
+                /*$http.post('/orderItems/getByReservationPrice',reservation).success(function(response){
+                   var price=response;
+                   alert("cena ukupna za rezervaciju je: "+price);
+                });*/
+
+                /*$http.put('/reservations/setInactive/',reservation).success(function(response){
+                    reservation=response;
                     var racun = {
                         reservation : reservation
-                    };
-                    console.log(racun);
-                    alert("SVE JE U REDU, MOZE SE IZDATI RACUN");
+                    }
+                    bill
 
-                }
-                else
-                    alert("NISU SVE NARUDZBE SPREMNE");
-            });
+                });*/
 
+            }
+            else
+                alert("NE MOZES PLATITI");
         }
 
         $scope.zapocni_narucivanje = function(reservation){

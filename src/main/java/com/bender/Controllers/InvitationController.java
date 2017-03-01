@@ -42,8 +42,11 @@ public class InvitationController {
         List<Invitation> invitations = repository.findByInvited(guest);
         ArrayList<Invitation> activeConfirmed = new ArrayList<>();
         for(Invitation inv : invitations){
-            Date resDate = new Date();
-            resDate.setHours(resDate.getHours()+inv.getReservation().getDuration());
+            Date datum = inv.getReservation().getDateTime();
+            Date resDate=new Date(datum.getTime());
+            resDate.setHours(resDate.getHours() + inv.getReservation().getDuration());
+            /*Date resDate = new Date();
+            resDate.setHours(resDate.getHours()+inv.getReservation().getDuration());*/
             if (resDate.after(new Date()))
                 if (inv.isConfirmed())
                     activeConfirmed.add(inv);
@@ -57,8 +60,11 @@ public class InvitationController {
         List<Invitation> invitations = repository.findByInvited(guest);
         ArrayList<Invitation> activeConfirmed = new ArrayList<>();
         for(Invitation inv : invitations) {
-            Date resDate = new Date();
-            resDate.setHours(resDate.getHours()+inv.getReservation().getDuration());
+            Date datum = inv.getReservation().getDateTime();
+            Date resDate=new Date(datum.getTime());
+            resDate.setHours(resDate.getHours() + inv.getReservation().getDuration());
+            /*Date resDate = new Date();
+            resDate.setHours(resDate.getHours()+inv.getReservation().getDuration());*/
             if (resDate.after(new Date()))
                 if (!inv.isConfirmed())
                     activeConfirmed.add(inv);
@@ -79,8 +85,11 @@ public class InvitationController {
         List<Invitation> invitations = repository.findByInvited(guest);
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(Invitation inv : invitations) {
-            Date resDate = new Date();
-            resDate.setHours(resDate.getHours()+inv.getReservation().getDuration());
+            Date datum = inv.getReservation().getDateTime();
+            Date resDate=new Date(datum.getTime());
+            resDate.setHours(resDate.getHours() + inv.getReservation().getDuration());
+            /*Date resDate = new Date();
+            resDate.setHours(resDate.getHours()+inv.getReservation().getDuration());*/
             if (resDate.before(new Date()))
                 if (inv.isConfirmed())
                     reservations.add(inv.getReservation());
