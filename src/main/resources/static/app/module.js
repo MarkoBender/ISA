@@ -211,6 +211,12 @@
                     templateUrl: 'html/dodavanjeSmena.html',
                     controller: 'dodavanjesmenaController'
         });
+
+        $routeProvider.when('/inforad', {
+                    templateUrl: 'html/infoRad.html',
+                    controller: 'inforadController'
+        });
+
         $routeProvider.otherwise({});
     }]);
 })();
