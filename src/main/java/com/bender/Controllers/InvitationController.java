@@ -6,11 +6,14 @@ import com.bender.Beans.Reservation;
 import com.bender.Beans.Restaurant;
 import com.bender.Repositories.GuestRepository;
 import com.bender.Repositories.InvitationRepository;
+import com.bender.Repositories.ReservationRepository;
+import com.bender.Repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,11 +26,15 @@ public class InvitationController {
 
     private InvitationRepository repository;
     private GuestRepository guestRepository;
+    private ReservationRepository reservationRepository;
+    private RestaurantRepository restaurantRepository;
 
     @Autowired
-    public InvitationController(GuestRepository guestRepository,InvitationRepository repository) {
+    public InvitationController(GuestRepository guestRepository,InvitationRepository repository, ReservationRepository reservationRepository,RestaurantRepository restaurantRepository) {
         this.guestRepository = guestRepository;
         this.repository = repository;
+        this.reservationRepository = reservationRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
     @RequestMapping(value = "/all")
@@ -35,6 +42,36 @@ public class InvitationController {
         return repository.findAll();
     }
 
+    @RequestMapping(value="/visitsForDay/{resid}/{i}",method = RequestMethod.POST)
+    public int getVisitsForDay (@PathVariable long resid,@PathVariable int i,@RequestBody Date gotdaytoCheck){
+        Calendar c = Calendar.getInstance();
+        c.setTime(gotdaytoCheck);
+        c.add(Calendar.DATE, i);
+        Date daytoCheck = c.getTime();
+        int numberOfVisits = 0;
+        System.out.println(daytoCheck);
+        Restaurant restaurant = restaurantRepository.findOne(resid);
+        System.out.println(restaurant.getName());
+        List<Reservation> reservations = new ArrayList<Reservation>();
+        Date endDay = daytoCheck;
+        c.setTime(endDay);
+        c.add(Calendar.DATE, 1);
+        endDay = c.getTime();
+        for(Reservation res : reservationRepository.findByRestaurant(restaurant)){
+            if(res.getDateTime().getTime() >= daytoCheck.getTime() && res.getDateTime().getTime() <= endDay.getTime()){
+                reservations.add(res);
+                numberOfVisits++;
+            }
+        }
+        for(Reservation res : reservations){
+            for(Invitation inv : repository.findByReservation(res)){
+                if(inv.isConfirmed())
+                    numberOfVisits++;
+            }
+
+        }
+        return numberOfVisits;
+    }
 
     @RequestMapping(value = "/activeConfirmed/{id}")
     public List<Invitation> getActiveConfimedReservations(@PathVariable long id){

@@ -21,34 +21,22 @@
     </nav>
 
     <div>
-        <svg width="1000" height="1000">
+        <svg width="1000" height="1000" id="svgcontainer">
             <title id="title">A line chart showing some information</title>
             <g class="grid y-grid" id="xGrid">
                 <line x1="100" x2="100" y1="10" y2="411" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-                <circle cx="100" cy="10" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="100" cy="110" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="100" cy="210" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="100" cy="310" r="4" stroke="black" stroke-width="1" fill="red" />
             </g>
             <g class="grid x-grid" id="yGrid">
                 <line x1="100" x2="800" y1="410" y2="410" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-                <circle cx="100" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="200" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="300" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="400" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="500" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="600" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="700" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
-                <circle cx="800" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
             </g>
             <g class="labels x-labels">
-                <text x="185" y="430">Pon</text>
-                <text x="285" y="430">Uto</text>
-                <text x="385" y="430">Sre</text>
-                <text x="485" y="430">Cet</text>
-                <text x="585" y="430">Pet</text>
-                <text x="685" y="430">Sub</text>
-                <text x="785" y="430">Ned</text>
+                <text x="185" y="430">dan1</text>
+                <text x="285" y="430">dan2</text>
+                <text x="385" y="430">dan3</text>
+                <text x="485" y="430">dan4</text>
+                <text x="585" y="430">dan5</text>
+                <text x="685" y="430">dan6</text>
+                <text x="785" y="430">dan7</text>
                 <text x="400" y="470" class="label-title">Dan u nedelji</text>
             </g>
             <g class="labels y-labels">
@@ -59,6 +47,22 @@
                 <text x="85" y="420">0</text>
                 <text x="0" y="200" class="label-title">Br. gostiju</text>
             </g>
+            <circle cx="100" cy="10" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="100" cy="110" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="100" cy="210" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="100" cy="310" r="4" stroke="black" stroke-width="1" fill="red" />
+
+            <circle cx="100" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="200" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="300" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="400" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="500" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="600" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="700" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+            <circle cx="800" cy="410" r="4" stroke="black" stroke-width="1" fill="red" />
+
         </svg>
+        <input type="date" ng-model = "dateStart" class="form-control">
+        <button type="button" class="btn btn-success" ng-click="click()">Click</button>
     </div>
 </div>
