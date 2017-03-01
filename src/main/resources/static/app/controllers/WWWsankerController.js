@@ -5,16 +5,17 @@
              .module('app')
              .controller('WWWsankerController', WWWsankerController);
 
-         WWWsankerController.$inject = ['$cookies','$http','$scope','$location'];
-         function WWWsankerController($cookies,$http,$scope,$location) {
+         WWWsankerController.$inject = ['$cookies','$http','$scope','$location','$window'];
+         function WWWsankerController($cookies,$http,$scope,$location,$window) {
 
-            /*if($cookies.get('uloga') != 'Barman')
-                        $location.url('/#');*/
+            if($cookies.get('uloga') != 'Barman')
+                        $location.url('/');
 
             $scope.logout = function (){
                          $cookies.put('name', null);
                          $cookies.put('id', null);
                          $cookies.put('uloga',null);
+                         $location.url('/');
                     }
 
             var date = new Date();
@@ -23,6 +24,7 @@
             $http.get('/barmen/findOne/'+$cookies.get('id'))
                                 .success(function(response){
                                     $scope.loggedUser = response;
+                                    $scope.barman=response;
                                     $http.post('/schedules/forEmployee',$scope.loggedUser).success(function(response){
                                         angular.forEach(response,function(value,index){
                                                 var endHours=value.endHours;

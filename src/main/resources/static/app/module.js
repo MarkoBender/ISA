@@ -115,16 +115,6 @@
                                                     controller: 'WWWkonobarPregledNarudzbinaController'
                                                     });
 
-        $routeProvider.when('/WWWkonobarPregledGotovihNarudzbina', {
-                                                            templateUrl: 'html/WWWkonobarPregledGotovihNarudzbina.html',
-                                                            controller: 'WWWkonobarPregledGotovihNarudzbinaController'
-                                                            });
-
-        $routeProvider.when('/WWWkonobarPregledPrihvacenihNarudzbina', {
-                                                            templateUrl: 'html/WWWkonobarPregledPrihvacenihNarudzbina.html',
-                                                            controller: 'WWWkonobarPregledPrihvacenihNarudzbinaController'
-                                                });
-
         $routeProvider.when('/WWWsanker', {
                                             templateUrl: 'html/WWWsanker.html',
                                             controller: 'WWWsankerController'

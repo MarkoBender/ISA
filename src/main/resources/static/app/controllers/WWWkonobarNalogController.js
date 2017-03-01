@@ -5,22 +5,57 @@
          .module('app')
          .controller('WWWkonobarNalogController', WWWkonobarNalogController);
 
-     WWWkonobarNalogController.$inject = ['$cookies','$http','$scope','$location'];
-     function WWWkonobarNalogController($cookies,$http,$scope,$location) {
+     WWWkonobarNalogController.$inject = ['$cookies','$http','$scope','$location','$window'];
+     function WWWkonobarNalogController($cookies,$http,$scope,$location,$window) {
 
-        /*if($cookies.get('uloga') != 'Steward')
-                    $location.url('/#');*/
+        if($cookies.get('uloga') != 'Steward')
+                        $location.url('/');
+        var date = new Date();
 
+        $scope.radi=false;
         $http.get('/stewards/findOne/'+$cookies.get('id'))
                         .success(function(response){
                             $scope.loggedUser = response;
-                            $scope.steward = response;
+                            $scope.steward=response;
+                            $http.post('/schedules/forEmployee',$scope.loggedUser).success(function(response){
+                                angular.forEach(response,function(value,index){
+                                        var endHours=value.endHours;
+                                        if(endHours==0)
+                                            endHours=24;
+
+                                        if(value.startday<=date.getTime() && value.endday>=date.getTime() && value.startHours<=date.getHours() && endHours>=date.getHours()){
+                                            var potencijalno_dobro=true;
+                                            if(value.startHours==date.getHours()){
+                                                if(value.startMinutes>date.getMinutes()){
+                                                    potencijalno_dobro=false;
+                                                }
+                                            }
+
+                                            if(potencijalno_dobro){
+                                                if(value.endHours==date.getHours()){
+                                                    if(value.endMinutes<date.getMinutes()){
+                                                        potencijalno_dobro=false;
+                                                    }
+                                                }
+                                            }
+
+                                            if(potencijalno_dobro){
+                                                console.log("JEBENOOOOOOOOOOOOOOOOOOOO SAM U DOBROM VREMENU");
+                                                $scope.radi=true;
+                                                $cookies.put('region',value.restaurantRegion.restaurant_region_id)
+                                                console.log($scope.radi);
+                                            }
+                                        }
+                                    });
+                                console.log($scope);
+                            });
                         });
 
         $scope.logout = function (){
                      $cookies.put('name', null);
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
+                     $location.url('/');
                 }
 
 
@@ -32,6 +67,7 @@
                                     $http.put('/stewards/update/'+$scope.steward.user_id,$scope.steward)
                                         .success(function(response){
                                             console.log("Password changed!");
+                                            $window.location.reload();
                                         });
                                 }
                                 else
@@ -41,6 +77,7 @@
                     else{
                         $http.put('/stewards/update/'+$scope.steward.user_id,$scope.steward)
                             .success(function(response){
+                                $window.location.reload();
                                 console.log("Updated!");
                             });
                     }
@@ -53,6 +90,7 @@
                 $http.put('/stewards/update/'+$scope.loggedUser.user_id,$scope.loggedUser)
                     .success(function(response){
                         console.log("Password changed!");
+                        $window.location.reload();
                     });
                 }
                 else{

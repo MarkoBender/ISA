@@ -5,11 +5,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul ng-show="loggedUser.firstLog == false  && radi==true" class="nav navbar-nav">
                     <li><a href="#/WWWsankerPregledNarucenihPica">Pregled narucenih pica</a></li>
-                    <li><a href="#/WWWsankerPregledGotovihPica">Pregled gotovih pica</a></li>
+                    <!--<li><a href="#/WWWsankerPregledGotovihPica">Pregled gotovih pica</a></li>-->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ><a href="#/WWWsankerRasporedRada">Raspored rada</a></li>
-                    <li ><a href="#/WWWsankerNalog">Moj nalog</a></li>
+                    <li ng-show="loggedUser.firstLog == false"><a href="#/WWWsankerRasporedRada">Raspored rada</a></li>
+                    <li ng-show="loggedUser.firstLog == false"><a href="#/WWWsankerNalog">Moj nalog</a></li>
                     <li><a href="#" ng-click="logout()">Izloguj se</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->

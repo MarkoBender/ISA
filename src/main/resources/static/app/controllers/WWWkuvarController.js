@@ -5,11 +5,11 @@
              .module('app')
              .controller('WWWkuvarController', WWWkuvarController);
 
-         WWWkuvarController.$inject = ['$cookies','$http','$scope','$location'];
-         function WWWkuvarController($cookies,$http,$scope,$location) {
+         WWWkuvarController.$inject = ['$cookies','$http','$scope','$location','$window'];
+         function WWWkuvarController($cookies,$http,$scope,$location,$window) {
 
-            /*if($cookies.get('uloga') != 'Steward')
-                        $location.url('/#');*/
+            if($cookies.get('uloga') != 'Cook')
+                        $location.url('/');
 
             var date = new Date();
             $scope.radi=false;
@@ -17,11 +17,13 @@
                          $cookies.put('name', null);
                          $cookies.put('id', null);
                          $cookies.put('uloga',null);
+                         $location.url('/');
                     }
 
             $http.get('/cooks/findOne/'+$cookies.get('id'))
                     .success(function(response){
                         $scope.loggedUser = response;
+                        $scope.cook=response;
                         $http.post('/schedules/forEmployee',$scope.loggedUser).success(function(response){
                             angular.forEach(response,function(value,index){
                                     var endHours=value.endHours;
@@ -59,6 +61,7 @@
                 if($scope.newpassword == $scope.confirmpassword){
                 $http.put('/cooks/changepassword/'+$scope.loggedUser.user_id,$scope.newpassword)
                     .success(function(response){
+                        $window.location.reload();
                         console.log("Password changed!");
                     });
                 }

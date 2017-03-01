@@ -5,24 +5,12 @@
              .module('app')
              .controller('WWWkonobarController', WWWkonobarController);
 
-         WWWkonobarController.$inject = ['$cookies','$http','$scope','$location'];
-         function WWWkonobarController($cookies,$http,$scope,$location) {
+         WWWkonobarController.$inject = ['$cookies','$http','$scope','$location','$window'];
+         function WWWkonobarController($cookies,$http,$scope,$location,$window) {
 
-            /*if($cookies.get('uloga') != 'Steward')
-                        $location.url('/#');*/
+            if($cookies.get('uloga') != 'Steward')
+                        $location.url('/');
             var date = new Date();
-
-            console.log(date.getTime());
-
-            console.log("Hours: "+date.getHours());
-            console.log("Minutes: "+date.getMinutes());
-            console.log("Month: "+(date.getMonth()+1));
-            console.log("Day: "+date.getDate());
-            console.log("Year: "+date.getFullYear());
-
-            //console.log(date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2));
-
-            //date.toString("MMM dd"); // "Dec 20"
 
             $scope.radi=false;
             $http.get('/stewards/findOne/'+$cookies.get('id'))
@@ -66,29 +54,14 @@
                          $cookies.put('name', null);
                          $cookies.put('id', null);
                          $cookies.put('uloga',null);
+                         $location.url('/');
                     }
-
-
-            /*$scope.changepassword = function (){
-                        if($scope.newpassword == $scope.confirmpassword){
-                            $scope.loggedUser.password = $scope.newpassword;
-                            console.log($scope);
-                            $http.put('/stewards/update/'+$scope.loggedUser.user_id,$scope.loggedUser)
-                                .success(function(response){
-                                    console.log("Password changed!");
-                                });
-                            }
-                            else{
-                                $scope.error = 'Oba polja moraju imati istu vrednost!';
-                                document.getElementById('newpassword').style.borderColor = "red";
-                                document.getElementById('confirmpassword').style.borderColor = "red";
-                            }
-                    }*/
 
             $scope.changepassword = function (){
                             if($scope.newpassword == $scope.confirmpassword){
                             $http.put('/stewards/changepassword/'+$scope.loggedUser.user_id,$scope.newpassword)
                                 .success(function(response){
+                                    $window.location.reload();
                                     console.log("Password changed!");
                                 });
                             }
