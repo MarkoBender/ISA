@@ -332,8 +332,24 @@ public class OrderItemController {
                     return false;
             }
         }
-
+        /*reservation.setStatus("closed");
+        reservation.setTables(new ArrayList<RestaurantTable>());
+        reservationRepository.save(reservation);*/
         return true;
+    }
+
+    @RequestMapping(value="/getByReservationPrice", method=RequestMethod.POST)
+    public double getBRP(@RequestBody Reservation reservation){
+        List<OrderItem> sve=repository.findAll();
+
+        double price=0;
+        for(OrderItem oi: sve){
+            if(oi.getReservation().getReservation_id()==reservation.getReservation_id()) {
+                System.out.println(oi.getFoodDrinkItem().getPrice());
+                price+=oi.getFoodDrinkItem().getPrice();
+            }
+        }
+        return price;
     }
 
 
