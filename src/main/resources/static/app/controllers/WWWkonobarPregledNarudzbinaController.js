@@ -30,7 +30,7 @@
                      $cookies.put('name', null);
                      $cookies.put('id', null);
                      $cookies.put('uloga',null);
-                }
+                };
 
         $scope.konobarPrihvati = function(order){
             $http.put('/orderItems/konobarPrihvati/'+$scope.loggedUser.user_id,order).success(function(response){

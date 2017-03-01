@@ -53,6 +53,24 @@ public class ReservationController {
         return active;
     }
 
+    @RequestMapping(value="/isActive/{id}")
+    Boolean isReserved (@PathVariable long id){
+        Boolean isActive = false;
+        List<Reservation> reservations = repository.findAll();
+        for(Reservation res : reservations){
+            Date resDate = res.getDateTime();
+            resDate.setHours(resDate.getHours() + res.getDuration());
+            if(resDate.after(new Date())){
+                for(RestaurantTable t : res.getTables()){
+                    if(t.getRestaurant_table_id() == id)
+                        isActive = true;
+                }
+            }
+        }
+        return isActive;
+    }
+
+
     @RequestMapping(value = "/allInactive/{id}")
     List<Reservation> getAllInactive(@PathVariable long id){
         Guest host = guestRepository.findOne(id);

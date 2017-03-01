@@ -11,6 +11,11 @@
             var d = new Date();
             $scope.currentdate = d.getTime();
 
+            $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
 
             $http.get('/salesmen/findOne/'+$cookies.get('id'))
                 .success(function(response){

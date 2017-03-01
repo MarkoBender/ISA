@@ -15,6 +15,11 @@
     rasporedsedenjaController.$inject = ['$cookies','$http','$scope','$compile','$injector','$window'];
     function rasporedsedenjaController($cookies,$http,$scope,$compile,$injector,$window) {
 
+            $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
 
             $http.get('/restaurantManagers/findOne/'+$cookies.get('id'))
                         .success(function(response){
@@ -141,10 +146,17 @@
                                 if(offsetX >= value.xvalue && offsetX <= value.xvalue + value.width){
                                     if(offsetY >= value.yvalue && offsetY <= value.yvalue + value.height){
                                         console.log(value.restaurant_table_id);
-                                        $http.delete('/restauranttables/delete/'+value.restaurant_table_id)
+                                        $http.get('/reservations/isActive/'+value.restaurant_table_id)
                                             .success(function(response){
-                                                console.log('deleted table!');
-                                                $window.location.reload();
+                                                if(response == false){
+                                                    $http.delete('/restauranttables/delete/'+value.restaurant_table_id)
+                                                        .success(function(response){
+                                                            console.log('deleted table!');
+                                                            $window.location.reload();
+                                                        });
+                                                }
+                                                else
+                                                    $scope.error = 'Dati sto je rezervisan, nemoguce obrisati!';
                                             });
                                     }
                                 }

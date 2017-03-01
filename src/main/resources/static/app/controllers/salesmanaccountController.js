@@ -8,6 +8,12 @@
     salesmanaccountController.$inject = ['$cookies','$http','$scope'];
     function salesmanaccountController($cookies,$http,$scope) {
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
         $http.get('/salesmen/findOne/'+$cookies.get('id'))
                         .success(function(response){
                             $scope.loggedUser = response;

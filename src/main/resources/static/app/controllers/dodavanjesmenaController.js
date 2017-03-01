@@ -8,6 +8,12 @@
     dodavanjesmenaController.$inject = ['$cookies','$http','$scope'];
     function dodavanjesmenaController($cookies,$http,$scope) {
 
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
         var d = new Date();
         $scope.currentdate = d.getTime();
 

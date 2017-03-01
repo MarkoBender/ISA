@@ -8,6 +8,12 @@
     SalesmanordersController.$inject = ['$cookies','$http','$scope'];
     function SalesmanordersController($cookies,$http,$scope) {
 
+            $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                };
+
             var d = new Date();
             $scope.newoffer = {};
             $scope.activeorders = [];
