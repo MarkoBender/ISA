@@ -1,6 +1,8 @@
 package com.bender.Controllers;
 
+import com.bender.Beans.Restaurant;
 import com.bender.Beans.Steward;
+import com.bender.Beans.SystemManager;
 import com.bender.Repositories.StewardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,22 @@ public class StewardController {
     @RequestMapping(value = "/findOne/{id}")
     public Steward getById(@PathVariable long id){
         return repository.findOne(id);
+    }
+
+    @RequestMapping(value= "/getfromName/{name}/{surname}")
+    public Steward getfromName(@PathVariable String name, @PathVariable String surname, @RequestBody Restaurant restaurant){
+        Steward myuser = null;
+        System.out.println(name);
+        System.out.println(surname);
+        System.out.println(restaurant.getName());
+        for(Steward s : repository.findAll()){
+            if(s.getRestaurant().getRestaurant_id() == restaurant.getRestaurant_id())
+                if(s.getName().toLowerCase().equals(name.toLowerCase()))
+                    if(s.getSurname().toLowerCase().equals(surname.toLowerCase()))
+                        myuser = s;
+        }
+
+        return myuser;
     }
 
     @RequestMapping(value = "/changepassword/{id}", method = RequestMethod.PUT)
