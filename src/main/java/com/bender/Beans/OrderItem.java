@@ -1,4 +1,4 @@
-package com.bender.Models;
+package com.bender.Beans;
 
 import com.bender.Beans.*;
 

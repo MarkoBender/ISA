@@ -1,9 +1,10 @@
-package com.bender.Models;
+package com.bender.Beans;
 
 import com.bender.Beans.Reservation;
 import com.bender.Beans.Steward;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by User on 2/25/2017.
  */
 @Entity
-public class Bill {
+public class Bill{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

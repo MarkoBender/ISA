@@ -20,7 +20,7 @@
                                             $scope.myavalibleorders = response;
                                             console.log($scope);
                                         });
-                                    $http.get('/bills/all').success(function(response){
+                                    $http.post('/bills/findBillsForSteward/'+$cookies.get('region'), $scope.loggedUser).success(function(response){
                                         $scope.bills=response;
                                     });
 
@@ -58,6 +58,14 @@
                                                     //$scope.restaurantRegion=region;
                                                 });
                             });
+        }
+
+        $scope.izradiRacun=function(bill){
+            $http.post('/bills/izradiZaRacun/'+$cookies.get('id'),bill).success(function(response){
+                alert("USPESNO");
+                //console.log(response);
+                $window.location.reload();
+            });
         }
 
 

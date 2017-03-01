@@ -1,5 +1,6 @@
-package com.bender.Models;
+package com.bender.Repositories;
 
+import com.bender.Beans.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

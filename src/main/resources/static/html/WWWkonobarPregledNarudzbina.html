@@ -64,7 +64,7 @@
                     <td>{{bill.reservation.reservation_id}}</td>
                     <td>{{bill.reservation.status}}</td>
                     <td>{{bill.steward.user_id}}</td>
-                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-2" ng-click="">Izradi racun</button></td>
+                    <td><button type="button" class="btn btn-info" ng-click="izradiRacun(bill)" ng-show="bill.reservation.status=='active'">Izradi racun</button></td>
                     <th>&nbsp;</th>
                 </tr>
                 </tbody>
