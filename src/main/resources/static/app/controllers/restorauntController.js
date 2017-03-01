@@ -7,13 +7,22 @@
 
 
 
-    RestorauntsController.$inject = ['$cookies','$http','$scope'];
-    function RestorauntsController($cookies,$http,$scope) {
+    RestorauntsController.$inject = ['$cookies','$http','$scope','$location'];
+    function RestorauntsController($cookies,$http,$scope,$location) {
 
+        if($cookies.get('uloga') != 'Guest')
+                    $location.url('/');
+
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                     $location.url('/');
+                }
         $http.get('/guests/findOne/'+$cookies.get('id'))
-                                        .success(function(response){
-                                            $scope.loggedUser = response;
-                                            });
+                                    .success(function(response){
+                                        $scope.loggedUser = response;
+                                    });
 
         $http.get('http://ip-api.com/json')
             .success(function(coordinates) {

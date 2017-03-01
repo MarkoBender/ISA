@@ -5,14 +5,23 @@
         .module('app')
         .controller('InvitationsController', InvitationsController);
 
-    InvitationsController.$inject = ['$scope','$http','$cookies'];
+    InvitationsController.$inject = ['$scope','$http','$cookies','$location'];
 
-    function InvitationsController($scope,$http,$cookies) {
+    function InvitationsController($scope,$http,$cookies,$location) {
 
+        if($cookies.get('uloga') != 'Guest')
+                            $location.url('/');
+
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                     $location.url('/');
+                }
         $http.get('/guests/findOne/'+$cookies.get('id'))
-                    .success(function(response){
-                        $scope.loggedUser = response;
-                    });
+                                    .success(function(response){
+                                        $scope.loggedUser = response;
+                                    });
 
         var refresh = function(){
             $http.get('/invitations/activeNotConfirmed/' + $cookies.get('id')).success(function(response){

@@ -7,9 +7,25 @@
 
 
 
-    AccountController.$inject = ['$scope','$http','$cookies'];
+    AccountController.$inject = ['$scope','$http','$cookies','$location'];
 
-    function AccountController($scope,$http,$cookies) {
+    function AccountController($scope,$http,$cookies,$location) {
+
+
+
+        if($cookies.get('uloga') != 'Guest')
+                    $location.url('/');
+
+        $scope.logout = function (){
+                     $cookies.put('name', null);
+                     $cookies.put('id', null);
+                     $cookies.put('uloga',null);
+                     $location.url('/');
+                }
+        $http.get('/guests/findOne/'+$cookies.get('id'))
+                                    .success(function(response){
+                                        $scope.loggedUser = response;
+                                    });
 
         console.log('/guests/friends/' + $cookies.get('id'));
 
