@@ -79,6 +79,21 @@
 
         };
 
+        $scope.otkaziPorudzbinu= function(orderItem){
+            alert("USAO SAM")
+            var trenutniDatum=new Date();
+            trenutniDatum.setMinutes(trenutniDatum.getMinutes()+30);
+            if(trenutniDatum.getTime()>=orderItem.reservation.dateTime){
+                alert("NEMOZES OBRISATI");
+            }
+            else{
+                alert("MOZES OBRISATI!");
+                $http.delete('/orderItems/izbrisi/'+orderItem.orderItem_id).success(function(response){
+                                    console.log("uspesno proslo");
+                                });
+            }
+        }
+
 
     }
 })();

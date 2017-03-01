@@ -353,5 +353,10 @@ public class OrderItemController {
         return price;
     }
 
+    @RequestMapping(value="/izbrisi/{ordID}", method=RequestMethod.DELETE)
+    public void del(@PathVariable long ordID){
+        repository.delete(repository.findOne(ordID));
+    }
+
 
 }

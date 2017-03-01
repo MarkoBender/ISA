@@ -140,6 +140,36 @@ console.log($scope.reservationsWithInvitations);
             });
         }
 
+        $scope.otkaziRezervaciju = function(reservation){
+            //obrisi order item, invitations, reservation
+            var trenutniDatum=new Date();
+            trenutniDatum.setMinutes(trenutniDatum.getMinutes()+30);
+            if(trenutniDatum.getTime()>=reservation.dateTime){
+                alert("NEMOZES OBRISATI");
+
+            }
+            else{
+                alert("MOZES OBRISATI!");
+                $http.delete('/reservations/izbrisi/'+reservation.reservation_id).success(function(response){
+                                    console.log("uspesno proslo");
+                                });
+            }
+        }
+
+        $scope.otkaziPorudzbinu= function(orderItem){
+            var trenutniDatum=new Date();
+            trenutniDatum.setMinutes(trenutniDatum.getMinutes()+30);
+            if(trenutniDatum.getTime()>=orderItem.reservation.dateTime){
+                alert("NEMOZES OBRISATI");
+            }
+            else{
+                alert("MOZES OBRISATI!");
+                $http.delete('/orderItems/izbrisi/'+orderItem.orderItem_id).success(function(response){
+                                    console.log("uspesno proslo");
+                                });
+            }
+        }
+
 
         var currentReservation;
         $scope.getInvitable = function(res){

@@ -30,53 +30,10 @@
                     <th>Prijatelji</th>
                     <th>&nbsp;</th>
                     <th>&nbsp;</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!--tr>
-                    <td>Moj naziv</td>
-                    <td>12.12.2016</td>
-                    <td>2 sata</td>
-                    <td>
-                        <ul class="list-group">
-                            <li >Petar Petrovic<input type="checkbox"disabled checked></li>
-                            <li >Marko Markovic</li>
-                            <li >Boro Boric</li>
-                            <li >Nikola Nikolic</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul class="list-group" style="list-style-type: none;">
-                            <li ><input type="checkbox"disabled checked></li>
-                            <li ><input type="checkbox"disabled ></li>
-                            <li ><input type="checkbox"disabled checked></li>
-                            <li ><input type="checkbox"disabled ></li>
-                        </ul>
-                    </td>
-                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-pozovi" ng-click="getInvitable(nesto)">Pozovi prijatelja</button></td>
-                    <td><button class="btn btn-danger">Naruci</button></td>
-                </tr-->
-                <!--tr ng-repeat="res in reservations">
-                    <td>{{res.restaurant.name}}</td>
-                    <td>{{res.dateTime}}</td>
-                    <td>{{res.duration + " sata"}}</td>
-                    <td>
-                        <ul class="list-group">
-                            <li>Petar Petrovic</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul class="list-group" style="list-style-type: none;">
-                            <li ><input type="checkbox"disabled checked></li>
-                            <li ><input type="checkbox"disabled ></li>
-                            <li ><input type="checkbox"disabled checked></li>
-                            <li ><input type="checkbox"disabled ></li>
-                        </ul>
-                    </td>
-                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-pozovi" ng-click="getInvitable(res)">Pozovi prijatelja</button></td>
-                    <td><button class="btn btn-danger">Naruci</button></td>
-                </tr-->
-
                 <tr ng-repeat="res in reservationsWithInvitations">
                     <td>{{res.reservation.restaurant.name}}</td>
                     <td>{{res.reservation.dateTime  | date:'yyyy-MM-dd HH:mm'}}</td>
@@ -89,6 +46,7 @@
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-pozovi" ng-click="getInvitable(res.reservation)">Pozovi prijatelja</button></td>
                     <td><button class="btn btn-danger" data-toggle="modal" data-target="#modal-narucivanje" ng-click="zapocni_narucivanje(res.reservation)">Naruci</button></td>
                     <td><button class="btn btn-danger" ng-click="zatraziRacun(res.reservation)" ng-if="res.reservation.status==null">Zatrazi racun </button></td>
+                    <td><button class="btn btn-danger" ng-click="otkaziRezervaciju(res.reservation)" >Otkazi rezervaciju </button></td>
                 </tr>
                 </tbody>
             </table>
@@ -144,16 +102,16 @@
                             <tr>
                                 <th>Objekat porudzbine</th>
                                 <th>Status</th>
-                                <!--<th>&nbsp;</th>
-                                <th>&nbsp;</th>-->
+                                <th>&nbsp;</th>
+                                <!--<th>&nbsp;</th>-->
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="order in myavalibleorders">
                                 <td>{{order.foodDrinkItem.name}}</td>
                                 <td>{{order.status}}</td>
-                                <!--<td><button type="button" ng-if="order.status == gostPorucio || order.status == konobarPrihvatio" class="btn btn-info">Izmeni porudzbinu</button></td>
-                                <td><button type="button"class="btn btn-danger">Obrisi porudzbinu</button></td>-->
+                                <!--<td><button type="button" ng-if="order.status == gostPorucio || order.status == konobarPrihvatio" class="btn btn-info">Izmeni porudzbinu</button></td>-->
+                                <td><button type="button"class="btn btn-danger" ng-click="otkaziPorudzbinu(order)">Obrisi porudzbinu</button></td>
                             </tr>
                             </tbody>
                         </table>

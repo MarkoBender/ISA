@@ -1,10 +1,9 @@
 package com.bender.Controllers;
 
-import com.bender.Beans.Guest;
-import com.bender.Beans.Invitation;
-import com.bender.Beans.Reservation;
-import com.bender.Beans.RestaurantTable;
+import com.bender.Beans.*;
 import com.bender.Repositories.GuestRepository;
+import com.bender.Repositories.InvitationRepository;
+import com.bender.Repositories.OrderItemRepository;
 import com.bender.Repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +21,15 @@ public class ReservationController {
 
     private GuestRepository guestRepository;
     private ReservationRepository repository;
+    private OrderItemRepository orderItemRepository;
+    private InvitationRepository invitationRepository;
 
     @Autowired
-    public ReservationController(GuestRepository guestRepository, ReservationRepository repository) {
+    public ReservationController(GuestRepository guestRepository, ReservationRepository repository, OrderItemRepository orderItemRepository, InvitationRepository invitationRepository) {
         this.guestRepository = guestRepository;
         this.repository = repository;
+        this.orderItemRepository=orderItemRepository;
+        this.invitationRepository=invitationRepository;
     }
 
     @RequestMapping(value = "/all")
@@ -102,6 +105,29 @@ public class ReservationController {
         repository.save(reservation);
 
         return reservation;
+    }
+
+    @RequestMapping(value="/izbrisi/{resID}", method=RequestMethod.DELETE)
+    public void del(@PathVariable long resID){
+
+        List<Invitation> invitations=new ArrayList<>(invitationRepository.findAll());
+
+        for(Invitation i : invitations){
+            if(i.getReservation().getReservation_id()==resID) {
+                invitationRepository.delete(invitationRepository.findOne(i.getInvitation_id()));
+                System.out.println("BRISEM POZIVNICU");
+            }
+        }
+
+        List<OrderItem> orderItems=new ArrayList<>(orderItemRepository.findAll());
+        for(OrderItem oi: orderItems){
+            if(oi.getReservation().getReservation_id()==resID) {
+                orderItemRepository.delete(orderItemRepository.findOne(oi.getOrderItem_id()));
+                System.out.println("BRISEM JELO");
+            }
+        }
+
+        repository.delete(repository.findOne(resID));
     }
 
 }
