@@ -12,8 +12,11 @@
         }
     }
 
-    rasporedsedenjaController.$inject = ['$cookies','$http','$scope','$compile','$injector','$window'];
-    function rasporedsedenjaController($cookies,$http,$scope,$compile,$injector,$window) {
+    rasporedsedenjaController.$inject = ['$cookies','$http','$scope','$compile','$injector','$window','$location'];
+    function rasporedsedenjaController($cookies,$http,$scope,$compile,$injector,$window,$location) {
+
+            if($cookies.get('uloga') != 'RestaurantManager')
+                $location.url('/');
 
             $scope.logout = function (){
                      $cookies.put('name', null);
@@ -34,7 +37,10 @@
                                     $scope.tables = response;
                                     console.log($scope);
                                 });
-
+                            $http.put('/reservations/setTables',$scope.loggedUser.restaurant)
+                                .success(function(response){
+                                    console.log('izbrisao');
+                                });
                         });
 
 

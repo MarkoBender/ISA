@@ -5,8 +5,11 @@
         .module('app')
         .controller('profilrestoranaController', profilrestoranaController);
 
-    profilrestoranaController.$inject = ['$cookies','$http','$scope'];
-    function profilrestoranaController($cookies,$http,$scope) {
+    profilrestoranaController.$inject = ['$cookies','$http','$scope','$location'];
+    function profilrestoranaController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

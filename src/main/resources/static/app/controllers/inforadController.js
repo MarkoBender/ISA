@@ -8,6 +8,9 @@
          inforadController.$inject = ['$cookies','$http','$scope','$location','$compile'];
          function inforadController($cookies,$http,$scope,$location,$compile) {
 
+            if($cookies.get('uloga') != 'RestaurantManager')
+                $location.url('/');
+
             $scope.logout = function (){
                      $cookies.put('name', null);
                      $cookies.put('id', null);

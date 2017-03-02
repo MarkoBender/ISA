@@ -5,8 +5,11 @@
         .module('app')
         .controller('kartapicaController', kartapicaController);
 
-    kartapicaController.$inject = ['$cookies','$http','$scope'];
-    function kartapicaController($cookies,$http,$scope) {
+    kartapicaController.$inject = ['$cookies','$http','$scope','$location'];
+    function kartapicaController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

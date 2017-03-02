@@ -5,8 +5,11 @@
         .module('app')
         .controller('dodavanjesmenaController', dodavanjesmenaController);
 
-    dodavanjesmenaController.$inject = ['$cookies','$http','$scope'];
-    function dodavanjesmenaController($cookies,$http,$scope) {
+    dodavanjesmenaController.$inject = ['$cookies','$http','$scope','$location'];
+    function dodavanjesmenaController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

@@ -90,6 +90,19 @@ public class ReservationController {
         }
         return inactive;
     }
+    @RequestMapping(value="/setTables", method=RequestMethod.PUT)
+    public void setTables (@RequestBody Restaurant restaurant){
+        for(Reservation reservation : repository.findByRestaurant(restaurant)){
+            Date datum = reservation.getDateTime();
+            Date resDate=new Date(datum.getTime());
+            resDate.setHours(resDate.getHours() + reservation.getDuration() + 5);
+            if(resDate.before(new Date())){
+                List<RestaurantTable> tables = new ArrayList<RestaurantTable>();
+                reservation.setTables(tables);
+                repository.save(reservation);
+            }
+        }
+    }
 
     @RequestMapping(value = "/add",method = RequestMethod.PUT)
     Reservation addReservation(@RequestBody Reservation reservation){

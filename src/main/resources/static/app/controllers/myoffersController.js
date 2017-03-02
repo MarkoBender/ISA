@@ -5,8 +5,11 @@
         .module('app')
         .controller('myoffersController', myoffersController);
 
-    myoffersController.$inject = ['$cookies','$http','$scope'];
-    function myoffersController($cookies,$http,$scope) {
+    myoffersController.$inject = ['$cookies','$http','$scope','$location'];
+    function myoffersController($cookies,$http,$scope,$location) {
+
+            if($cookies.get('uloga') != 'Salesman')
+                $location.url('/');
 
             var d = new Date();
             $scope.currentdate = d.getTime();

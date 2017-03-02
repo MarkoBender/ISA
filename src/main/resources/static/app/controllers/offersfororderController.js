@@ -5,8 +5,11 @@
         .module('app')
         .controller('offersfororderController', offersfororderController);
 
-    offersfororderController.$inject = ['$cookies','$http','$scope','$routeParams'];
-    function offersfororderController($cookies,$http,$scope,$routeParams) {
+    offersfororderController.$inject = ['$cookies','$http','$scope','$routeParams','$location'];
+    function offersfororderController($cookies,$http,$scope,$routeParams,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.orderID = $routeParams.orderid;
 

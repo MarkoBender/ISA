@@ -5,8 +5,11 @@
         .module('app')
         .controller('noviradnikController', noviradnikController);
 
-    noviradnikController.$inject = ['$cookies','$http','$scope','$window'];
-    function noviradnikController($cookies,$http,$scope,$window) {
+    noviradnikController.$inject = ['$cookies','$http','$scope','$window','$location'];
+    function noviradnikController($cookies,$http,$scope,$window,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

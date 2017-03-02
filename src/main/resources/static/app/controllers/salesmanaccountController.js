@@ -5,8 +5,11 @@
         .module('app')
         .controller('salesmanaccountController', salesmanaccountController);
 
-    salesmanaccountController.$inject = ['$cookies','$http','$scope'];
-    function salesmanaccountController($cookies,$http,$scope) {
+    salesmanaccountController.$inject = ['$cookies','$http','$scope','$location'];
+    function salesmanaccountController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'Salesman')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

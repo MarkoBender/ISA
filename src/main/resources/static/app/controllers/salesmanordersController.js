@@ -5,8 +5,11 @@
         .module('app')
         .controller('SalesmanordersController', SalesmanordersController);
 
-    SalesmanordersController.$inject = ['$cookies','$http','$scope'];
-    function SalesmanordersController($cookies,$http,$scope) {
+    SalesmanordersController.$inject = ['$cookies','$http','$scope','$location','$window'];
+    function SalesmanordersController($cookies,$http,$scope,$location,$window) {
+
+            if($cookies.get('uloga') != 'Salesman')
+                $location.url('/');
 
             $scope.logout = function (){
                      $cookies.put('name', null);
@@ -90,6 +93,7 @@
                 $http.put('/salesmen/changepassword/'+$scope.loggedUser.user_id,$scope.newpassword)
                     .success(function(response){
                         console.log("Password changed!");
+                        $window.location.reload();
                     });
                 }
                 else{

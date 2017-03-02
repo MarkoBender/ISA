@@ -5,8 +5,11 @@
         .module('app')
         .controller('KonkursController', KonkursController);
 
-    KonkursController.$inject = ['$cookies','$http','$scope'];
-    function KonkursController($cookies,$http,$scope) {
+    KonkursController.$inject = ['$cookies','$http','$scope','$location'];
+    function KonkursController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

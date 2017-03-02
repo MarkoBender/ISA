@@ -5,8 +5,11 @@
         .module('app')
         .controller('VuksaController', VuksaController);
 
-    VuksaController.$inject = ['$cookies','$http','$scope','$window'];
-    function VuksaController($cookies,$http,$scope,$window) {
+    VuksaController.$inject = ['$cookies','$http','$scope','$window','$location'];
+    function VuksaController($cookies,$http,$scope,$window,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);

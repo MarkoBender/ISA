@@ -5,8 +5,11 @@
         .module('app')
         .controller('jelovnikController', jelovnikController);
 
-    jelovnikController.$inject = ['$cookies','$http','$scope'];
-    function jelovnikController($cookies,$http,$scope) {
+    jelovnikController.$inject = ['$cookies','$http','$scope','$location'];
+    function jelovnikController($cookies,$http,$scope,$location) {
+
+        if($cookies.get('uloga') != 'RestaurantManager')
+            $location.url('/');
 
         $scope.logout = function (){
                      $cookies.put('name', null);
