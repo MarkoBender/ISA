@@ -26,7 +26,7 @@ public class RestaurantTable {
     @ManyToOne
     private RestaurantRegion restaurantRegion;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     private Restaurant restaurant;
 

@@ -55,17 +55,17 @@ public class RestaurantController {
         restaurant.setRestaurant_id(id);
         repository.save(restaurant);
     }
-
-    @RequestMapping(value="/dobaviRezervisaneStoloveZaVreme/{resID}/{vreme}",method=RequestMethod.POST)
+    /*
+   @RequestMapping(value="/dobaviRezervisaneStoloveZaVreme/{resID}/{vreme}",method=RequestMethod.POST)
     public List<RestaurantTable> dobaviRSZV(@PathVariable long resID, @PathVariable long vreme){
         System.out.println(vreme);
         Date date=new Date(vreme);
         Restaurant restaurant=repository.getOne(resID);
         System.out.println(restaurant.getName()+" je ima restorana za datum "+date);
 
+
         List<RestaurantTable> tables=new ArrayList<>();
         List<Reservation> rr=reservationRepository.findAll();
-        //RestaurantTable kkk=null;
         for(Reservation r : rr){
             System.out.println("USAO SAM U JEBENU PETLJU");
             if(r.getRestaurant().getRestaurant_id()==restaurant.getRestaurant_id()){
@@ -74,33 +74,17 @@ public class RestaurantController {
                 Date datumKR=new Date(datumPR.getTime());
                 datumKR.setHours(datumKR.getHours()+r.getDuration());
 
-                //if(date.after(datumPR) && date.before(datumKR)){
                 if(date.getTime()>=datumPR.getTime() && date.getTime()<=datumKR.getTime()){
                     System.out.println("datum pocetka "+datumPR);
                     System.out.println("datum kraja "+datumKR);
                     System.out.println("moj datum "+date);
                     System.out.println("DATUM DOBAR");
                     tables.addAll(r.getTables());
-                    /*for(RestaurantTable t : r.getTables()) {
-                        RestaurantTable tt=restaurantTableRepository.findOne(t.getRestaurant_table_id());
-                        System.out.println("PRVI PUT USAO");
-                        tables.add(tt);
-                        kkk=tt;
-                    }*/
                 }
             }
         }
-
-        /*System.out.println("ZAVRSIO SAM SA PRETRAGOM");
-        System.out.println(tables.size());
-        List<RestaurantTable> lll=new ArrayList<RestaurantTable>();
-        for(RestaurantTable t : tables){
-            lll.add(restaurantTableRepository.findOne(t.getRestaurant_table_id()));
-        }
-        return lll;*/
-
         return tables;
-    }
+    }*/
 
     @RequestMapping(value="/mozeLiSe/{resID}/{vreme}/{stoID}",method=RequestMethod.POST)
     public boolean mozeLiSe(@PathVariable long resID, @PathVariable long vreme, @PathVariable long stoID){

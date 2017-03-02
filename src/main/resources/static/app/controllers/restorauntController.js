@@ -151,30 +151,33 @@
 
             $scope.selectedElement = 0;
 
-
+            $scope.bluetables = [];
+            $scope.redtables = [];
             console.log(res);
-            $http.post('/restaurantregions/forRestaurant',$scope.restoran)
-                            .success(function(response){
-                                $scope.regions = response;
-                                console.log($scope);
-                                $http.post('/restauranttables/forRestaurant',$scope.restoran)
-                                                .success(function(response){
-                                                    $scope.tables = response;
-                                                    console.log($scope);
-                                                });
-                            });
         };
 
 
         $scope.predjiNaRezervisanjeStolova = function(){
-            alert($scope.datum);
-            alert($scope.restoran.name);
 
-            $http.post("/restaurants/dobaviRezervisaneStoloveZaVreme/"+$scope.restoran.restaurant_id+"/"+$scope.datum.getTime()).success(function(response){
-                $scope.rezSto=response;
-                console.log(response);
-                console.log("USPESNO PROSAO");
-            });
+
+            $http.post('/restaurantregions/forRestaurant',$scope.restoran)
+                                        .success(function(response){
+                                            $scope.regions = response;
+                                            console.log($scope);
+                                            $http.post('/restauranttables/forRestaurant',$scope.restoran)
+                                                            .success(function(response){
+                                                                $scope.tables = response;
+                                                                angular.forEach(response, function(value, index){
+                                                                    $http.post("/restaurants/mozeLiSe/"+value.restaurant.restaurant_id+"/"+$scope.datum.getTime()+"/"+value.restaurant_table_id)
+                                                                        .success(function(response){
+                                                                            if(response == false)
+                                                                                $scope.bluetables.push(value);
+                                                                            else
+                                                                                $scope.redtables.push(value);
+                                                                        });
+                                                                })
+                                                            });
+                                        });
 
         }
 

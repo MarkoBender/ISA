@@ -26,7 +26,7 @@ public class RestaurantRegion {
 
     private String color;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     private Restaurant restaurant;
 
